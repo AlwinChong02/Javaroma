@@ -32,7 +32,7 @@
         $servername = "localhost";
         $serverUsername = "root";
         $serverPassword = "";
-        $dbname = "javaroma";
+        $dbname = "javaroma_db";
         
         //check conncection
         $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);

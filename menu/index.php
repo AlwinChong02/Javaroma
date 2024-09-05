@@ -383,9 +383,24 @@ $resultProducts = $conn->query($sqlProducts);
         function addToCart() {
             const quantity = document.getElementById('quantity').value;
             const productName = document.getElementById('modalTitle').innerText;
+            const price = document.getElementById('modalPrice').innerText;
 
-            alert('Added ' + quantity + ' of ' + productName + ' to the cart!');
-            // You can replace the alert with a more complex action, like sending the data to the backend or updating the UI
+            fetch('add_to_cart.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        productName: productName,
+                        quantity: quantity,
+                        price: price
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => console.error('Error:', error));
         }
 
         function openModal(image, title, description, ingredients, price) {
@@ -397,7 +412,7 @@ $resultProducts = $conn->query($sqlProducts);
             let ingredientsArray = ingredients.split(',');
             let ingredientsList = document.getElementById("modalIngredients");
             ingredientsList.innerHTML = '';  // Clear previous content
-            ingredientsArray.forEach(function (ingredient) {
+            ingredientsArray.forEach(function(ingredient) {
                 let li = document.createElement("li");
                 li.innerText = ingredient;
                 ingredientsList.appendChild(li);
@@ -405,7 +420,7 @@ $resultProducts = $conn->query($sqlProducts);
 
             // Fill price
             let priceList = document.getElementById("modalPrice");
-            priceList.innerHTML = '';  // Clear previous content
+            priceList.innerHTML = ''; // Clear previous content
             let li = document.createElement("li");
             li.innerText = price;
             priceList.appendChild(li);
