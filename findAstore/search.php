@@ -46,7 +46,8 @@ include('../includes/navigationList.php')
                     }
                 } else {
                     // No results found, display a message
-                    echo "<p>No stores found. Please try a different search term.</p>";
+                    header("Location: index.php");
+                    exit();
                 }
             }
         }
