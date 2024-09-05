@@ -7,35 +7,34 @@
 </head>
 
 <body>
-    <h1> Register Now to get amazing benefits!</h1>
-    <div class="left">
-        <div class="illustration">
-            <img src="illustration.png" alt="Illustration">
+    <div class="container">
+        <div class="left">
+            <div class="illustration">
+                <img src="illustration.png" alt="Illustration">
+            </div>
         </div>
-    </div>
-    <form id="register-form" action="register.php" method="post" onsubmit="validateForm()">
-        <div class="input-box">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name">
-        </div>
-        <div class="input-box">
-            <label for="email">Email:</label>
-            <input type="text" name="email" id="email">
-        </div>
-        <div class="input-box">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password">
-        </div>
-        <button type="submit" onsubmit="validateForm()" class="login-btn">Register</button>
+        <div class="right">
+            <div class="login-box">
+                <h1>Register</h1>
+                <p>Have existing account? <a href="login.php">Login now!</a></p>
 
-        <script src='userValidation.js'></script>
-    </form>
-    <div>
-        <p>Already have an account? <a href="login.php">Login here</a></p>
-    </div>
-
-    <script src='userValidation.js'></script>
-    <?php
+                <form id="register-form" action="register.php" method="post" onsubmit="validateForm()">
+                    <div class="input-box">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+                    <div class="input-box">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div class="input-box">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <button type="submit" onsubmit="validateForm()" class="login-btn">Register</button>
+                </form>
+                <script src='userValidation.js'></script>
+                <?php
     $servername = "localhost";
     $serverUsername = "root";
     $serverPassword = "";
@@ -50,32 +49,39 @@
     }
 
     //get data from form 
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+    if($_SERVER["REQUEST_METHOD"] === "POST") {
+        $name = $_POST['name'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
 
-    //hash password
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        //hash password
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    // prepare and bind 
-    $sql = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-    $sql->bind_param("sss", $name, $email, $hashedPassword);
-    $sql->execute();
+        //prepare and bind 
+        $sql = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        $sql->bind_param("sss", $name, $email, $hashedPassword);
+        $sql->execute();
 
-    if ($sql->affected_rows > 0) {
-        //display pop up dialog
-        echo "<script>alert('Registration successful')</script>";
+        if ($sql->affected_rows > 0) {
+            //display pop up dialog
+            echo "<script>alert('Registration successful')</script>";
 
+            //back to login page
+            echo "<a href='login.php'>Login</a>";
+        } else {
+            echo "Registration failed";
+        }
 
-        //back to login page
-        echo "<a href='login.php'>Login</a>";
-    } else {
-        echo "Registration failed";
+        $conn->close();
     }
 
-    $conn->close();
-
     ?>
+
+            </div>
+        </div>
+    </div>
+
+    <script src='userValidation.js'></script>
 </body>
 
 </html>
