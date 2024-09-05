@@ -29,6 +29,7 @@
             $email = $_POST['email']??'';
             $messages =$_POST['messages']??'';
         
+
         $errors=[];
 
         if(empty($name)){
@@ -51,9 +52,8 @@
             include('database.php');
             // Process the input (send mail, etc.)
             // For example:
-            echo '<div id="contentWrapper" class="content">';
-            echo 'Thank you for contacting us! We will get back to you shortly.';
-            echo "</div>";
+            header("Location: /Javaroma/index.php");
+
         } else {
             // Redisplay the form, with error messages
             include('form.php');
