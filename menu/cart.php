@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['cart'] = array();
 
         // Redirect to success page
-        header("Location: checkout_success.php");
+        header("Location: payment.php");
         exit();
     }
 }
