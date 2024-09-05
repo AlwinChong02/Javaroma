@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Advertisment and brand shows</title>
+        <title>Advertisement and brand shows</title>
         <h2>Welcome JavaRoma make your day</h2>
         <link rel="stylesheet" href="WebStyle/mystyle2.css">
         
@@ -10,7 +10,7 @@
             ::before
             <div class="col-md-6 col-sm-6 col-xs-12"> ==$0
                 <a class="logo navBar-btn" href="/" title="Home">
-                    <img src="Web/CoffeeBean.jpg" alt="Home"></a>
+                    <img src="Javaroma/CoffeeBean.jpg" alt="Home"></a>
 </div>
 <div class="col-md-6 col-sm-6 col-xs-12">==$0
     <div class="topcontent">
@@ -38,9 +38,9 @@
 </head>
 <body>
     
-    <div class="box1" style="--img : url(Web/CoffeeBean.jpg);" data-text="Coffee brand">
+    <div class="box1" style="--img : url(Javaroma/CoffeeBean.jpg);" data-text="Coffee brand">
 </div>
-<div class="box2" style="--img : url(Web/coffeeBackground.jpg);" data-text="Coffee brand">
+<div class="box2" style="--img : url(Javaroma/coffeeBackground.jpg);" data-text="Coffee brand">
 </div>
 
 

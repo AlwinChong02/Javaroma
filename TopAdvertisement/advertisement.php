@@ -1,5 +1,5 @@
 <nav id="advertisements">
     <ul>
-        <li><a href="/Web/TopAdvertisement"></a></li>
+        <li><a href="/Javaroma/TopAdvertisement"></a></li>
 </ul>
 </nav>
