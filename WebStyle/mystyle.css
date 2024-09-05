@@ -837,3 +837,23 @@ button[type="submit"]:hover {
   width: 100%;
   left:60%;
 }
+
+/* Reward page */
+.downloadapps img{
+  position:absolute;
+  height: auto;
+  width:100%;
+  left:0%;
+  top:0;
+}
+
+/* .javaromaapp{
+  transform: translateY(20px);
+  opacity: 0;
+  transition: 1s ease;
+}
+
+.javaromaapp--visible{
+  transform: translateY(0);
+  opacity: 1;
+} */

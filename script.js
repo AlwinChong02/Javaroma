@@ -7,6 +7,7 @@ const paragraphs = document.querySelectorAll(".paragraph");
 const logos = document.querySelectorAll(".javaromalogo");
 const fades = document.querySelectorAll(".fadein");
 
+
 // Add scroll event listener for logos
 document.addEventListener("scroll", function(){
     logos.forEach((logo)=>{
@@ -32,6 +33,8 @@ document.addEventListener("scroll", function(){
         }
     });
 });
+
+
 
 // Function to check if an element is in view
 function isInView(element){
