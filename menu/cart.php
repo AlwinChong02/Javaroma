@@ -1,9 +1,59 @@
 <?php
 session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "javaroma_db";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+
+        // Step 1: Insert into the 'orders' table
+        $userID = 1; // Replace with actual user ID if available
+        $sqlOrder = "INSERT INTO orders (userID, orderDate) VALUES (123, NOW())";
+        $stmtOrder = $conn->prepare($sqlOrder);
+        $stmtOrder->bind_param("i", $userID);
+        $stmtOrder->execute();
+
+        // Get the last inserted orderID
+        $orderID = $conn->insert_id;
+
+        // Step 2: Insert into 'orderItems' table for each product in the cart
+        foreach ($_SESSION['cart'] as $item) {
+            $productID = $item['id']; // Assuming you have a product ID in your cart session
+            $quantity = $item['quantity'];
+            $price = $item['price'];
+            $temperature = isset($item['temperature']) ? $item['temperature'] : '';
+
+            $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature) 
+                              VALUES (?, ?, ?, ?, ?)";
+            $stmtOrderItems = $conn->prepare($sqlOrderItems);
+            $stmtOrderItems->bind_param("iiids", $orderID, $productID, $quantity, $price, $temperature);
+            $stmtOrderItems->execute();
+        }
+
+        // Clear the cart session
+        $_SESSION['cart'] = array();
+
+        // Redirect to success page
+        header("Location: checkout_success.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +65,8 @@ session_start();
             border-collapse: collapse;
         }
 
-        .cart-table th, .cart-table td {
+        .cart-table th,
+        .cart-table td {
             border: 1px solid #ddd;
             padding: 8px;
         }
@@ -43,9 +94,10 @@ session_start();
         }
     </style>
 </head>
+
 <body>
     <h2>Your Cart</h2>
-    
+
     <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
         <table class="cart-table">
             <tr>
@@ -86,7 +138,9 @@ session_start();
         </table>
 
         <div class="cart-buttons">
-            <button onclick="window.location.href='payment.php'">Proceed to Checkout</button>
+            <form action="payment.php" method="POST">
+                <button type="submit">Proceed to Checkout</button>
+            </form>
             <button onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
@@ -94,4 +148,5 @@ session_start();
         <button onclick="window.location.href='index.php'">Continue Shopping</button>
     <?php endif; ?>
 </body>
+
 </html>
