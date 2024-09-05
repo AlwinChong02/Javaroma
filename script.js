@@ -7,6 +7,7 @@ const paragraphs = document.querySelectorAll(".paragraph");
 const logos = document.querySelectorAll(".javaromalogo");
 const fades = document.querySelectorAll(".fadein");
 
+
 // Add scroll event listener for logos
 document.addEventListener("scroll", function(){
     logos.forEach((logo)=>{

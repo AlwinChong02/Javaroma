@@ -5,7 +5,7 @@
                 <a href="/Javaroma/menu">Menu</a>
                 <a href="/Javaroma/founderNaboutus">About Us</a>
                 <a href="/Javaroma/contactPage">Contact Page</a>
-                <a href="/Javaroma/rewardPage">Rewards</a>
+                <a href="/Javaroma/rewardPage" id="rewardBtn">Rewards</a>
                 <a href="/Javaroma/findAstore/index.php">Find a Store</a>
             </nav>
         </header>
