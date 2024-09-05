@@ -88,6 +88,7 @@ $resultProducts = $conn->query($sqlProducts);
             flex-grow: 1;
             padding: 20px;
             margin-right: 50px;
+            animation: fade-up 1.0s ease forwards;
         }
 
         .product-gallery {
@@ -193,6 +194,7 @@ $resultProducts = $conn->query($sqlProducts);
             border-radius: 10px;
             position: relative;
             text-align: center;
+            animation: fade-down 0.5s ease forwards;
         }
 
         .close {
