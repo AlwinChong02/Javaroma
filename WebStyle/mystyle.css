@@ -847,7 +847,7 @@ button[type="submit"]:hover {
   top:0;
 }
 
-.javaromaapp{
+/* .javaromaapp{
   transform: translateY(20px);
   opacity: 0;
   transition: 1s ease;
@@ -856,4 +856,4 @@ button[type="submit"]:hover {
 .javaromaapp--visible{
   transform: translateY(0);
   opacity: 1;
-}
+} */

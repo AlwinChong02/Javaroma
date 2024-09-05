@@ -34,6 +34,8 @@ document.addEventListener("scroll", function(){
     });
 });
 
+
+
 // Function to check if an element is in view
 function isInView(element){
     const rect = element.getBoundingClientRect();
