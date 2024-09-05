@@ -29,7 +29,6 @@
             $email = $_POST['email']??'';
             $messages =$_POST['messages']??'';
         
-
         $errors=[];
 
         if(empty($name)){
