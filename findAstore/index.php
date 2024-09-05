@@ -10,21 +10,21 @@
 </head>
 
 <body>
-    <section id="findbranch">
-        <div class="branch">
-            <h1>Find the nearest "JavaRoma"!</h1>
-            <img src="../images/branch.png">
-        </div>
-        <?php include('../includes/navigationList.php'); ?>
-        <?php include('header.php'); ?>
-        <div class="search">
-            <form action="search.php" method="POST">
-                <input type="text" name="search" placeholder="Find a store">
-                <button type="submit" name="submit-search">Search</button>
-            </form>
-        </div>
-    </section>
-    <?php include('../includes/footerPolicy.php'); ?>
+<section id="findbranch">
+<div class="branch">
+<h1>Find the nearest "JavaRoma"!</h1>
+<img src="../images/branch.png">
+</div>
+<?php include('../includes/navigationList.php');?>
+<?php include ('header.php');?>
+<div class="search">
+<form action="search.php" method="POST">
+    <input type="text" name="search" placeholder="Find a store">
+    <button type="submit" name="submit-search">Search</button>
+</form>
+</div>
+</section>
+<?php include('../includes/footerPolicy.php'); ?>
 </body>
 
 </html>

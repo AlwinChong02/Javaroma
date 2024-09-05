@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "conf_db";
+$dbname = "javaroma_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -10,8 +10,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$stmt = $conn->prepare("INSERT INTO conference (name, email, area, details) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $name, $email, $area, $details);
+$stmt = $conn->prepare("INSERT INTO feedback (name, email, messages) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $name, $email, $messages);
 
 if ($stmt->execute()) {
     echo "New record has been added successfully!";
@@ -22,11 +22,12 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
-<?php
+
+<!-- <?php
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "conf_db";
+$dbname = "javaroma_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -34,7 +35,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$stmt = $conn->prepare("INSERT INTO conference (name, email, area, details) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO feedback (name, email, area, details) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $name, $email, $area, $details);
 
 if ($stmt->execute()) {
@@ -45,4 +46,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-?>
+?> -->
