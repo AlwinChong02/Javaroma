@@ -12,13 +12,13 @@
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="/Web/termsNconditions/index.php">Terms & Conditions</a></li>
-                        <li><a href="/Web/privacypolicy/index.php">Privacy Policy</a></li>
-                        <li><a href="/Web/FAQ/index.php">FAQ</a></li>
+                        <li><a href="/Javaroma/termsNconditions/index.php">Terms & Conditions</a></li>
+                        <li><a href="/Javaroma/privacypolicy/index.php">Privacy Policy</a></li>
+                        <li><a href="/Javaroma/FAQ/index.php">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footerlogo">
-                <img src="/Web/JavaRomaLogo.png">
+                <img src="/Javaroma/JavaRomaLogo.png">
     </div>
             </div>
             <p>
