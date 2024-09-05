@@ -19,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Step 1: Insert into the 'orders' table
         $userID = 1; // Replace with actual user ID if available
-        $sqlOrder = "INSERT INTO orders (userID, orderDate) VALUES (123, NOW())";
+        $orderDate = date('Y-m-d H:i:s');
+
+        $sqlOrder = "INSERT INTO orders (userID, orderDate) VALUES (?, ?)";
         $stmtOrder = $conn->prepare($sqlOrder);
-        $stmtOrder->bind_param("i", $userID);
+        $stmtOrder->bind_param("is", $userID, $orderDate);
         $stmtOrder->execute();
 
         // Get the last inserted orderID
@@ -138,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </table>
 
         <div class="cart-buttons">
-            <form action="payment.php" method="POST">
+            <form action="cart.php" method="POST">
                 <button type="submit">Proceed to Checkout</button>
             </form>
             <button onclick="window.location.href='index.php'">Continue Shopping</button>
