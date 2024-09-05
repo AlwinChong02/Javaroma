@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $temperature = isset($item['temperature']) ? $item['temperature'] : '';
 
             $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature) 
-                              VALUES (?, ?, ?, ?, ?)";
+                              VALUES (?, ?, ?, ?, hot)";
             $stmtOrderItems = $conn->prepare($sqlOrderItems);
             $stmtOrderItems->bind_param("iiids", $orderID, $productID, $quantity, $price, $temperature);
             $stmtOrderItems->execute();
