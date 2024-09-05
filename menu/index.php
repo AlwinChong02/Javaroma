@@ -384,6 +384,7 @@ $resultProducts = $conn->query($sqlProducts);
             const quantity = document.getElementById('quantity').value;
             const productName = document.getElementById('modalTitle').innerText;
             const price = document.getElementById('modalPrice').innerText;
+            const productID = document.getElementById('modalTitle').getAttribute('data-product-id');
 
             fetch('add_to_cart.php', {
                     method: 'POST',
@@ -391,6 +392,7 @@ $resultProducts = $conn->query($sqlProducts);
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        productID: productID,
                         productName: productName,
                         quantity: quantity,
                         price: price
