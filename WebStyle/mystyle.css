@@ -52,6 +52,7 @@ body{
   left:0;
   right:0;
   z-index: 1000;
+  
 }
 
 .header .logoname img{
@@ -847,6 +848,26 @@ button[type="submit"]:hover {
   top:0;
 }
 
+
+@keyframes fade-up{
+  0%{
+      opacity:0;
+      transform: translateY(-30px)scale(0.9);
+  }
+  100%{
+      opacity:1;
+      transform: translateY(0px)scale(1);
+  }
+}
+
+
+#Downloadapps{
+  background-color: rgb(251, 251, 183);
+}
+.javaromaapp{
+  animation: fade-up 1.0s ease forwards;
+}
+
 @keyframes appear{
   from{
       opacity:0;
@@ -861,5 +882,39 @@ button[type="submit"]:hover {
 .javaromareward{
 animation: appear linear;
 animation-timeline: view();
-animation-range: entry 0% cover 40%;
+animation-range: entry 0% cover 35%;
+position: absolute;
+height:50%;
+width:25%;
+top:30%;
+left:10%;
+
+}
+
+#reward1{
+  background-color: #ffffff;
+}
+#reward2{
+  background-color: #ffffff;
+}
+#reward3{
+  background-color: #ffffff;
+}
+.rewardh2 h2{
+  font-family: 'Poppins', monospace;
+  color: rgb(196, 127, 0);
+  box-sizing:border-box;
+  border-radius: 10px;
+  position: absolute;
+  top:15%;
+  font-size: 55px;
+}
+
+.rewardOne p{
+  max-width: 20%;
+  position: absolute;
+  left: 58%;
+  top: 40%;
+  font-size: 15px;
+  text-align: justify;
 }
