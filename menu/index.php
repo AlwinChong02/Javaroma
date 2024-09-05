@@ -51,7 +51,7 @@ $resultProducts = $conn->query($sqlProducts);
         .container {
             display: flex;
             margin-top: 140px;
-            padding-left: 50px; 
+            padding-left: 50px;
         }
 
         .sidebar {
@@ -92,27 +92,34 @@ $resultProducts = $conn->query($sqlProducts);
 
         .product-gallery {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Set to 4 products per row */
-            gap: 30px; /* Increase space between products */
+            grid-template-columns: repeat(4, 1fr);
+            /* Set to 4 products per row */
+            gap: 30px;
+            /* Increase space between products */
         }
 
         .product-item {
             background-color: #FFF;
-            padding: 25px; /* Increase padding to make products larger */
+            padding: 25px;
+            /* Increase padding to make products larger */
             border-radius: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             text-align: center;
-            height: 100%; /* Ensure all product items have the same height */
+            height: 100%;
+            /* Ensure all product items have the same height */
             cursor: pointer;
         }
 
         .product-item img {
-            max-width: 180px; /* Increase the size of the images */
-            max-height: 230px; /* Adjust the height accordingly */
-            margin: 0 auto; /* Center the images horizontally */
+            max-width: 180px;
+            /* Increase the size of the images */
+            max-height: 230px;
+            /* Adjust the height accordingly */
+            margin: 0 auto;
+            /* Center the images horizontally */
             display: block;
             border-radius: 10px;
         }
@@ -130,7 +137,8 @@ $resultProducts = $conn->query($sqlProducts);
             width: 100%;
             height: 1px;
             background-color: #ccc;
-            margin-top: 50px; /* Increase this value to add more space */
+            margin-top: 50px;
+            /* Increase this value to add more space */
             position: absolute;
             bottom: -60px;
             left: 0;
@@ -140,7 +148,8 @@ $resultProducts = $conn->query($sqlProducts);
             margin-top: 75px;
             display: flex;
             justify-content: center;
-            gap: 10px; /* Space between icons */
+            gap: 10px;
+            /* Space between icons */
         }
 
         .temperature-icons img {
@@ -282,16 +291,15 @@ $resultProducts = $conn->query($sqlProducts);
         .modal-cart button:hover {
             background-color: #002d66;
         }
-
     </style>
 </head>
 
 <body>
-<div class="navigation">
+    <div class="navigation">
         <?php include('../includes/navigationList.php'); ?>
     </div>
 
-    <div class="container">     
+    <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>DRINKS</h2>
@@ -300,7 +308,7 @@ $resultProducts = $conn->query($sqlProducts);
             </div>
             <?php
             if ($resultCategories->num_rows > 0) {
-                while($category = $resultCategories->fetch_assoc()) {
+                while ($category = $resultCategories->fetch_assoc()) {
                     echo '<div class="navigation-item">';
                     echo '<a href="?category=' . urlencode($category['productCategory']) . '">' . $category['productCategory'] . '</a>';
                     echo '</div>';
@@ -311,13 +319,13 @@ $resultProducts = $conn->query($sqlProducts);
 
         <!-- Main Content -->
         <div class="main-content">
-        <h3>Drinks</h3>
-        <h1><?php echo $selectedCategory; ?></h1>
+            <h3>Drinks</h3>
+            <h1><?php echo $selectedCategory; ?></h1>
             <div class="product-gallery">
                 <?php
                 if ($resultProducts->num_rows > 0) {
-                    while($product = $resultProducts->fetch_assoc()) {
-                        echo '<div class="product-item" onclick="openModal(\''. basename($product['imagePath']) . '\', \'' . addslashes($product['productName']) . '\', \'' . addslashes($product['productDescription']) . '\', \'' . addslashes($product['ingredients']) . '\', \'' . addslashes($product['price']) . '\')">';
+                    while ($product = $resultProducts->fetch_assoc()) {
+                        echo '<div class="product-item" onclick="openModal(\'' . basename($product['imagePath']) . '\', \'' . addslashes($product['productName']) . '\', \'' . addslashes($product['productDescription']) . '\', \'' . addslashes($product['ingredients']) . '\', \'' . addslashes($product['price']) . '\')">';
                         echo '<img src="../images/drinks/' . basename($product['imagePath']) . '" alt="' . $product['productName'] . '">';
                         echo '<div class="product-name">' . $product['productName'] . '</div>';
                         echo '<div class="temperature-icons">';
@@ -374,9 +382,24 @@ $resultProducts = $conn->query($sqlProducts);
         function addToCart() {
             const quantity = document.getElementById('quantity').value;
             const productName = document.getElementById('modalTitle').innerText;
-            
-            alert('Added ' + quantity + ' of ' + productName + ' to the cart!');
-            // You can replace the alert with a more complex action, like sending the data to the backend or updating the UI
+            const price = document.getElementById('modalPrice').innerText;
+
+            fetch('add_to_cart.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        productName: productName,
+                        quantity: quantity,
+                        price: price
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => console.error('Error:', error));
         }
 
         function openModal(image, title, description, ingredients, price) {
@@ -387,7 +410,7 @@ $resultProducts = $conn->query($sqlProducts);
             // Fill ingredients list
             let ingredientsArray = ingredients.split(',');
             let ingredientsList = document.getElementById("modalIngredients");
-            ingredientsList.innerHTML = '';  // Clear previous content
+            ingredientsList.innerHTML = ''; // Clear previous content
             ingredientsArray.forEach(function(ingredient) {
                 let li = document.createElement("li");
                 li.innerText = ingredient;
@@ -396,7 +419,7 @@ $resultProducts = $conn->query($sqlProducts);
 
             // Fill price
             let priceList = document.getElementById("modalPrice");
-            priceList.innerHTML = '';  // Clear previous content
+            priceList.innerHTML = ''; // Clear previous content
             let li = document.createElement("li");
             li.innerText = price;
             priceList.appendChild(li);
