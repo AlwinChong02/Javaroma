@@ -10,26 +10,6 @@
     <link rel="stylesheet" href="../WebStyle/mystyle.css">
     <?php include('../includes/navigationList.php'); ?>
 </head>
-<style>
-    @keyframes appear{
-        from{
-            opacity:0;
-            scale:0.5;
-            clip-path: insert(100% 100% 0 0);
-        }
-        to{
-            opacity:1;
-            clip-path: insert(0 0 0 0);
-        }
-    }
-.javaromareward{
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 40%;
-}
-
-</style>
-
 <body>
     <section id="Downloadapps">
         <div class="downloadapps">
