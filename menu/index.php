@@ -194,7 +194,7 @@ $resultProducts = $conn->query($sqlProducts);
             border-radius: 10px;
             position: relative;
             text-align: center;
-            animation: fade-down 0.5s ease forwards;
+            animation: fade-up 0.5s ease forwards;
         }
 
         .close {
