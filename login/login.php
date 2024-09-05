@@ -1,3 +1,15 @@
+<?php
+if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
+    $c_email = $_COOKIE['email'];
+    $c_password = $_COOKIE['password'];
+  }
+
+
+  
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +31,7 @@
         <div class="right">
             <div class="login-box">
                 <h2>Sign in</h2>
-                <p>Don't have an account? <a href="#">Register here!</a></p>
+                <p>Don't have an account? <a href="register.php">Register here!</a></p>
                 <form>
                     <div class="input-box">
                         <label for="email">Email</label>
@@ -41,7 +53,7 @@
                 $servername = "localhost";
                 $serverUsername = "root";
                 $serverPassword = "";
-                $dbname = "javaroma";
+                $dbname = "javaroma_db";
 
                 // Check connection
                 $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);
@@ -68,6 +80,9 @@
                     // Verify password
                     if (password_hash($password, PASSWORD_BCRYPT) == $hashedPassword) {
                         echo "Login successful";
+                        session_start();
+                        $_SESSION["email"] = $email;
+                        $_SESSION["password"] = $password;
                         setcookie("email", $email, time() + 86400, "/", "localhost", true);
                         setcookie("password", $password, time() + 86400, "/", "localhost", true);
 
