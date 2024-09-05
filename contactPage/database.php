@@ -10,8 +10,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$stmt = $conn->prepare("INSERT INTO feedback (name, email, messages) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $name, $email, $messages);
+$stmt = $conn->prepare("INSERT INTO feedback (name, email, messages) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $name, $email, $messages);
 
 if ($stmt->execute()) {
     echo "New record has been added successfully!";
