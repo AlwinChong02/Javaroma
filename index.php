@@ -49,7 +49,7 @@
                 <img src="JavaRomaLogo.png" width="500" height="200" class="javaromalogo">
             </div>
         </div><br>
-        <p class="paragraph">hhh The history of the coffee brand JavaRoma is extensive and inspirational. JavaRoma,
+        <p class="paragraph">The history of the coffee brand JavaRoma is extensive and inspirational. JavaRoma,
             which was founded in 2018 by a Malaysian girl who studied in Italy, is an embodiment of the merging of
             Malaysian entrepreneurial energy with Italian coffee traditions. The brand's aim is to convey the fragrant
             essence of coffee ("Java") and the romanticism of Italian coffee culture ("Roma"). This is reflected in the
