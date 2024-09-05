@@ -1,0 +1,1 @@
+<h1>Purchase & Refund Policy</h1>
