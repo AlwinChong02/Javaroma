@@ -370,6 +370,10 @@ $resultProducts = $conn->query($sqlProducts);
                     <ul id="modalPrice"></ul>
                 </div>
             </div>
+            <div class="modal-quantity">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 60px; text-align: center;">
+            </div>
             <div class="modal-cart">
                 <button onclick="addToCart()">Add to Cart</button>
             </div>
