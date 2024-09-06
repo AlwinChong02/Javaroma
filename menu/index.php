@@ -21,9 +21,9 @@ $resultCategories = $conn->query($sqlCategories);
 
 // Fetch products based on the selected category
 if ($selectedCategory == 'All') {
-    $sqlProducts = "SELECT productName, productDescription, imagePath, productCategory, ingredients, price FROM product";
+    $sqlProducts = "SELECT productID, productName, productDescription, imagePath, productCategory, ingredients, price FROM product";
 } else {
-    $sqlProducts = "SELECT productName, productDescription, imagePath, productCategory, ingredients, price FROM product WHERE productCategory = '$selectedCategory'";
+    $sqlProducts = "SELECT productID, productName, productDescription, imagePath, productCategory, ingredients, price FROM product WHERE productCategory = '$selectedCategory'";
 }
 
 $resultProducts = $conn->query($sqlProducts);
