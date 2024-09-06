@@ -57,13 +57,20 @@ for (let i = 0; i < toggles.length; i++) {
       icons[i].classList.add("fa-plus");
     }
 
-    for (let j = 0; j < contentDiv.length; j++) {
-      if (j !== i) {
-        contentDiv[j].style.height = "0px";
-        toggles[j].style.color = "#111130";
-        icons[j].classList.remove("fa-minus");
-        icons[j].classList.add("fa-plus");
-      }
-    }
-  });
+        for(let j=0; j<contentDiv.length; j++){
+            if(j!==i){
+                contentDiv[j].style.height ="0px";
+                toggles[j].style.color = "#111130";
+                icons[j].classList.remove('fa-minus');
+                icons[j].classList.add('fa-plus');
+            }
+        }
+    });
 }
+
+// Add event listener for profile icon
+document.querySelector('.profile-icon').addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.profile-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    event.preventDefault(); // Prevents link from being followed
+});
