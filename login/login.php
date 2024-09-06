@@ -1,15 +1,3 @@
-<?php
-if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
-    $c_email = $_COOKIE['email'];
-    $c_password = $_COOKIE['password'];
-}
-
-
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +6,6 @@ if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="login.css">
-
 </head>
 
 <body>
@@ -35,78 +22,87 @@ if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
                 <form id="login-form" action="login.php" method="post" onsubmit="validateForm()">
                     <div class=" input-box">
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email address">
-            </div>
-            <div class="input-box">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your Password">
-            </div>
-            <div class="remember-me">
-                <input type="checkbox" id="remember">
-                <label for="remember">Remember me</label>
-                <a href="#">Forgot Password?</a>
-            </div>
-            <button type="submit" onsubmit="validateForm()" class="login-btn">Login</button>
-            </form>
-            <script src="userValidation.js"></script>
-            <?php
-            $servername = "localhost";
-            $serverUsername = "root";
-            $serverPassword = "";
-            $dbname = "javaroma_db";
+                    <input type="email" id="email" name="email" placeholder="Enter your email address">
+                    </div>
+                    <div class="input-box">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your Password">
+                    </div>
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
 
-            // Check connection
-            $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            } else {
-                echo "Connected successfully<br>";
-            }
+                <script src="userValidation.js"></script>
 
-            // Get data from form 
-            if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                $email = $_POST['email'] ?? '';
-                $password = $_POST['password'] ?? '';
+                <?php
+                $servername = "localhost";
+                $serverUsername = "root";
+                $serverPassword = "";
+                $dbname = "javaroma_db";
 
-                // Prepare SQL statement
-                $sql = $conn->prepare("SELECT password FROM users WHERE email = ?");
-                $sql->bind_param("s", $email);
-                $sql->execute();
-
-                $result = $sql->get_result();
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $hashedPassword = $row['password'];
-
-                    // Verify password
-                    if (password_hash($password, PASSWORD_BCRYPT) == $hashedPassword) {
-                        echo "Login successful";
-                        session_start();
-                        $_SESSION["email"] = $email;
-                        $_SESSION["password"] = $password;
-                        setcookie("email", $email, time() + 86400, "/", "localhost", true);
-                        setcookie("password", $password, time() + 86400, "/", "localhost", true);
-
-                        header("Location: ../index.php");
-                    } else {
-                        echo "Login failed: Invalid password";
-                    }
+                // Check connection
+                $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
                 } else {
-                    echo "Login failed: User not found";
+                    echo "Connected successfully<br>";
                 }
-            }
 
-            $conn->close();
-            ?>
+                // Get data from form 
+                if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                    $email = $_POST['email'] ?? '';
+                    $password = $_POST['password'] ?? '';
 
-            <p>or continue with</p>
-            <div class="social-login">
-                <button class="social-btn facebook">Facebook</button>
-                <button class="social-btn apple">Apple</button>
-                <button class="social-btn google">Google</button>
+                    //hash password
+                    // $password = password_hash($password, PASSWORD_ARGON2ID);
+                    // echo "Hashed input password: " . $password . "<br>";
+
+                    // Prepare SQL statement
+                    $sql = $conn->prepare("SELECT password FROM users WHERE email = ?");
+                    $sql->bind_param("s", $email);
+                    $sql->execute();
+
+                    $result = $sql->get_result();
+                    echo "Number of rows: " . $result->num_rows . "<br>";
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $hashedPassword = $row['password'];
+                        // echo "Hashed password: " . $hashedPassword . "<br>";
+
+                        // Verify password
+                        if ($hashedPassword === md5($password)) {
+                            echo "Login successful";
+                            session_start();
+                            $_SESSION["email"] = $email;
+
+                            // Do not store passwords in sessions or cookies in plain text
+                            setcookie("email", $email, time() + 86400, "/", "localhost", true);
+                            header("Location: ../index.php");
+                            exit();
+                        } else {
+                            echo "Login failed: Invalid password";
+                            
+                        }
+                    } else {
+                        echo "Login failed: User not found";
+                    }
+                }
+
+                $conn->close();
+                ?>
+
+                <p>or continue with</p>
+                <div class="social-login">
+                    <button class="social-btn facebook">Facebook</button>
+                    <button class="social-btn apple">Apple</button>
+                    <button class="social-btn google">Google</button>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 
