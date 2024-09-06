@@ -2,19 +2,17 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $productName = $_POST['product_name'];
+    $productID = $_POST['product_id'];
     $newQuantity = $_POST['new_quantity'];
 
-    // Loop through the cart to find the product and update its quantity
     foreach ($_SESSION['cart'] as &$cartItem) {
-        if ($cartItem['name'] == $productName) {
+        if ($cartItem['id'] == $productID) { 
             $cartItem['quantity'] = $newQuantity;
             break;
         }
     }
 
-    // Redirect back to cart page
+    // Redirect back to the cart page
     header('Location: cart.php');
     exit();
 }
-?>
