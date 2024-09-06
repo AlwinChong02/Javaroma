@@ -504,6 +504,7 @@ $resultProducts = $conn->query($sqlProducts);
 
 
         </script>
+    </div>
 </body>
 
 </html>
