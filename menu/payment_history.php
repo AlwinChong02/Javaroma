@@ -14,6 +14,7 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,8 @@ $result = $conn->query($sql);
             border-collapse: collapse;
         }
 
-        .history-table th, .history-table td {
+        .history-table th,
+        .history-table td {
             border: 1px solid #ddd;
             padding: 8px;
         }
@@ -53,9 +55,10 @@ $result = $conn->query($sql);
         }
     </style>
 </head>
+
 <body>
     <h2>Payment History</h2>
-    
+
     <?php if ($result->num_rows > 0): ?>
         <table class="history-table">
             <tr>
@@ -67,7 +70,7 @@ $result = $conn->query($sql);
             </tr>
             <?php
             while ($row = $result->fetch_assoc()):
-            ?>
+                ?>
                 <tr>
                     <td><?php echo $row['product_name']; ?></td>
                     <td><?php echo $row['quantity']; ?></td>
@@ -87,6 +90,7 @@ $result = $conn->query($sql);
     <?php endif; ?>
 
 </body>
+
 </html>
 
 <?php

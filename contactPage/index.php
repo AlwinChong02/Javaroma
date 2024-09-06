@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 10px;
             justify-content: center;
             align-items: center;
-            display: flex;  
+            display: flex;
         }
 
         h1 {
@@ -147,7 +147,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 5px;
         }
 
-        .form-field, .ratings-select {
+        .form-field,
+        .ratings-select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -186,7 +187,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 padding: 30px;
             }
 
-            .col-1, .col-2 {
+            .col-1,
+            .col-2 {
                 width: 100%;
                 margin-bottom: 20px;
             }
@@ -235,7 +237,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h2>Submit Your Feedback</h2>
                     <div class="form-row">
                         <label for="description">Feedback Description</label>
-                        <textarea id="description" name="description" class="form-field" placeholder="Write your feedback here..." required></textarea>
+                        <textarea id="description" name="description" class="form-field"
+                            placeholder="Write your feedback here..." required></textarea>
                     </div>
                     <div class="form-row">
                         <label for="ratings">Ratings (1-5)</label>

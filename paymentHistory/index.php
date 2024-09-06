@@ -287,28 +287,29 @@ if ($conn->connect_error) {
         }
 
         .search-container {
-            margin-bottom: 30px; 
+            margin-bottom: 30px;
         }
 
         /* Search Input */
         #searchInput {
             width: 100%;
-            max-width: 500px; 
-            padding: 15px 20px; 
-            font-size: 16px; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /
-            transition: box-shadow 0.3s ease;   
+            max-width: 500px;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);/ transition: box-shadow 0.3s ease;
         }
 
         /* Add a hover/focus effect to the input */
         #searchInput:focus {
-            outline: none; /* Remove default outline */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add stronger shadow on focus */
-            border-color: #004080; /* Change border color to match theme */
+            outline: none;
+            /* Remove default outline */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            /* Add stronger shadow on focus */
+            border-color: #004080;
+            /* Change border color to match theme */
         }
-
     </style>
 </head>
 
@@ -375,113 +376,114 @@ if ($conn->connect_error) {
         </div>
 
 
-    <!-- The Modal -->
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div class="modal-header">
-                <img id="modalImage" src="" alt="Product Image">
-            </div>
-            <input type="hidden" id="productID" name="productID" value="">
-            <div class="modal-title" id="modalTitle">Product Name</div>
-            <div class="modal-description" id="modalDescription">Product Description</div>
-            <div class="modal-ingredients">
-                <div>
-                    <h4>Ingredients</h4>
-                    <ul id="modalIngredients"></ul>
+        <!-- The Modal -->
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="modal-header">
+                    <img id="modalImage" src="" alt="Product Image">
                 </div>
-                <div>
-                    <h4>Price</h4>
-                    <ul id="modalPrice"></ul>
+                <input type="hidden" id="productID" name="productID" value="">
+                <div class="modal-title" id="modalTitle">Product Name</div>
+                <div class="modal-description" id="modalDescription">Product Description</div>
+                <div class="modal-ingredients">
+                    <div>
+                        <h4>Ingredients</h4>
+                        <ul id="modalIngredients"></ul>
+                    </div>
+                    <div>
+                        <h4>Price</h4>
+                        <ul id="modalPrice"></ul>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-quantity">
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 60px; text-align: center;">
-            </div>
-            <div class="modal-cart">
-                <button onclick="addToCart()">Add to Cart</button>
+                <div class="modal-quantity">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1"
+                        style="width: 60px; text-align: center;">
+                </div>
+                <div class="modal-cart">
+                    <button onclick="addToCart()">Add to Cart</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        function addToCart() {
-            const productID = document.getElementById('productID').value;
-            const quantity = document.getElementById('quantity').value;
-            const productName = document.getElementById('modalTitle').innerText;
-            const price = document.getElementById('modalPrice').innerText;
+        <script>
+            function addToCart() {
+                const productID = document.getElementById('productID').value;
+                const quantity = document.getElementById('quantity').value;
+                const productName = document.getElementById('modalTitle').innerText;
+                const price = document.getElementById('modalPrice').innerText;
 
-            fetch('add_to_cart.php', {
+                fetch('add_to_cart.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        productID:productID,
+                        productID: productID,
                         productName: productName,
                         quantity: quantity,
                         price: price
-                    })  
+                    })
                 })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                })
-                .catch(error => console.error('Error:', error));
-        }
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
 
-        function openModal(image, title, description, ingredients, price,productID) {
-            document.getElementById("productID").value = productID;
-            document.getElementById("modalImage").src = "../images/drinks/" + image;
-            document.getElementById("modalTitle").innerText = title;
-            document.getElementById("modalDescription").innerText = description;
+            function openModal(image, title, description, ingredients, price, productID) {
+                document.getElementById("productID").value = productID;
+                document.getElementById("modalImage").src = "../images/drinks/" + image;
+                document.getElementById("modalTitle").innerText = title;
+                document.getElementById("modalDescription").innerText = description;
 
-            let o
+                let o
 
-            // Fill ingredients list
-            let ingredientsArray = ingredients.split(',');
-            let ingredientsList = document.getElementById("modalIngredients");
-            ingredientsList.innerHTML = ''; // Clear previous content
-            ingredientsArray.forEach(function(ingredient) {
+                // Fill ingredients list
+                let ingredientsArray = ingredients.split(',');
+                let ingredientsList = document.getElementById("modalIngredients");
+                ingredientsList.innerHTML = ''; // Clear previous content
+                ingredientsArray.forEach(function (ingredient) {
+                    let li = document.createElement("li");
+                    li.innerText = ingredient;
+                    ingredientsList.appendChild(li);
+                });
+
+                // Fill price
+                let priceList = document.getElementById("modalPrice");
+                priceList.innerHTML = ''; // Clear previous content
                 let li = document.createElement("li");
-                li.innerText = ingredient;
-                ingredientsList.appendChild(li);
-            });
+                li.innerText = price;
+                priceList.appendChild(li);
 
-            // Fill price
-            let priceList = document.getElementById("modalPrice");
-            priceList.innerHTML = ''; // Clear previous content
-            let li = document.createElement("li");
-            li.innerText = price;
-            priceList.appendChild(li);
+                document.getElementById("productModal").style.display = "block";
+            }
 
-            document.getElementById("productModal").style.display = "block";
-        }
+            function closeModal() {
+                document.getElementById("productModal").style.display = "none";
+            }
 
-        function closeModal() {
-            document.getElementById("productModal").style.display = "none";
-        }
+            function searchProducts() {
+                let searchQuery = document.getElementById('searchInput').value;
 
-        function searchProducts() {
-            let searchQuery = document.getElementById('searchInput').value;
+                // Create an AJAX request
+                let xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Update the product gallery with the filtered results
+                        document.getElementById("productGallery").innerHTML = this.responseText;
+                    }
+                };
 
-            // Create an AJAX request
-            let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    // Update the product gallery with the filtered results
-                    document.getElementById("productGallery").innerHTML = this.responseText;
-                }
-            };
-
-            // Send the request to searchProducts.php with the search query
-            xhttp.open("GET", "searchProducts.php?query=" + encodeURIComponent(searchQuery), true);
-            xhttp.send();
-        }
+                // Send the request to searchProducts.php with the search query
+                xhttp.open("GET", "searchProducts.php?query=" + encodeURIComponent(searchQuery), true);
+                xhttp.send();
+            }
 
 
-    </script>
+        </script>
 </body>
 
 </html>

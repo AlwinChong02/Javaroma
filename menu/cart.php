@@ -164,22 +164,25 @@ if (isset($_POST['checkout'])) {
             foreach ($_SESSION['cart'] as $key => $item):
                 $itemTotal = $item['quantity'] * $item['price'];
                 $totalPrice += $itemTotal;
-            ?>
+                ?>
                 <tr>
                     <td><?php echo $item['name']; ?></td>
                     <td>
                         <select name="temperature[<?php echo $item['id']; ?>]" required form="checkout-form">
                             <option value="" disabled selected hidden>Hot/Cold</option>
-                            <option value="Hot" <?php if ($item['temperature'] == 'Hot') echo 'selected'; ?>>Hot</option>
-                            <option value="Cold" <?php if ($item['temperature'] == 'Cold') echo 'selected'; ?>>Cold</option>
+                            <option value="Hot" <?php if ($item['temperature'] == 'Hot')
+                                echo 'selected'; ?>>Hot</option>
+                            <option value="Cold" <?php if ($item['temperature'] == 'Cold')
+                                echo 'selected'; ?>>Cold</option>
                         </select>
                     </td>
                     <td>
                         <!-- Quantity input -->
                         <form action="update_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                            <input type="number" class="quantity-input" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
-                        
+                            <input type="number" class="quantity-input" name="new_quantity"
+                                value="<?php echo $item['quantity']; ?>" min="1">
+
                             <div class="cart-actions">
                                 <!-- Update cart form -->
                                 <button type="submit">Update</button>
@@ -190,7 +193,7 @@ if (isset($_POST['checkout'])) {
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
-                            </div>
+                        </div>
                     </td>
                     <td>RM <?php echo $item['price']; ?></td>
                     <td>RM <?php echo number_format($itemTotal, 2); ?></td>
@@ -216,4 +219,3 @@ if (isset($_POST['checkout'])) {
 </body>
 
 </html>
-
