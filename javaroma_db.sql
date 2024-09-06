@@ -6,7 +6,7 @@ CREATE TABLE users (
   userID INT(5) AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(24) NOT NULL,
   email VARCHAR(100) NOT NULL,
-  password VARCHAR(24) NOT NULL
+  password TEXT NOT NULL
 );
 
 CREATE TABLE feedback (
@@ -30,6 +30,7 @@ CREATE TABLE product (
 CREATE TABLE orders (
   orderID INT(5) AUTO_INCREMENT PRIMARY KEY,
   userID INT(5),
+  totalAmount DECIMAL(5,2),
   orderDate DATETIME
 );
 
@@ -40,21 +41,6 @@ CREATE TABLE orderItems (
   quantity INT(5),
   price DECIMAL(5,2),
   temperature VARCHAR(10) 
-);
-
-CREATE TABLE payment (
-  paymentID INT(5) AUTO_INCREMENT PRIMARY KEY,
-  orderID INT(5),
-  totalAmount DECIMAL(5,2),
-  paymentMethod VARCHAR(20),
-  discountID INT(5),
-  date DATETIME
-);
-
-CREATE TABLE discount (
-  discountID INT(5) AUTO_INCREMENT PRIMARY KEY,
-  discountCode VARCHAR(10),
-  discountRate DECIMAL(5,2)
 );
 
 CREATE TABLE store(
