@@ -3,10 +3,11 @@
 <head>
     <meta charset='utf-8'>
     <title>User Profile</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='../WebStyle/mystyle.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='profile.css'>
 </head>
 <body>
-    <?php include('navigationList.php'); ?>
+    <?php include('../includes/navigationList.php'); ?>
     <h1>User Profile</h1>
     <form action='profile.php' method='post'>
         <label for='name'>Name:</label>
@@ -19,6 +20,6 @@
     </form>
 
 
-    <?php include('footerPolicy.php'); ?>
+    <?php include('../includes/footerPolicy.php'); ?>
 </body>
 </html>
