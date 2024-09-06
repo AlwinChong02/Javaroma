@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,14 +13,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+if (isset($_SESSION['userID'])) {
+    $userID = $_SESSION["userID"];
+} else {
+    die("Error: Required session variables are not set. Please log in and select a semester.");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userID = mysqli_real_escape_string($conn, $_POST['userID']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $ratings = mysqli_real_escape_string($conn, $_POST['ratings']);
     $date = date('Y-m-d'); // Automatically sets today's date
 
     // Insert query
-    $sql = "INSERT INTO feedback (userID, description, ratings, date) VALUES ('$123', '$description', '$ratings', '$date')";
+    $sql = "INSERT INTO feedback (userID, description, ratings, date) VALUES ('$userID', '$description', '$ratings', '$date')";
 
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Feedback submitted successfully!'); window.location.href = '../index.php';</script>";
