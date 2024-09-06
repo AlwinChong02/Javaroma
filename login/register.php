@@ -35,45 +35,51 @@
                 </form>
                 <script src='userValidation.js'></script>
                 <?php
-    $servername = "localhost";
-    $serverUsername = "root";
-    $serverPassword = "";
-    $dbname = "javaroma_db";
+                    $servername = "localhost";
+                    $serverUsername = "root";
+                    $serverPassword = "";
+                    $dbname = "javaroma_db";
 
-    //check conncection
-    $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } else {
-        echo "Connected successfully<br>";
-    }
+                    //check conncection
+                    $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    } else {
+                        echo "Connected successfully<br>";
+                    }
 
-    //get data from form 
-    if($_SERVER["REQUEST_METHOD"] === "POST") {
-        $name = $_POST['name'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+                    //get data from form 
+                    if($_SERVER["REQUEST_METHOD"] === "POST") {
 
-        //hash password
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+                        $name = $_POST['name'] ?? '';
+                        $email = $_POST['email'] ?? '';
+                        $password = $_POST['password'] ?? '';
 
-        //prepare and bind 
-        $sql = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        $sql->bind_param("sss", $name, $email, $hashedPassword);
-        $sql->execute();
+                        if (empty($name) || empty($email) || empty($password)) {
+                            echo "Please fill in all fields";
+                            exit();
+                        }
 
-        if ($sql->affected_rows > 0) {
-            //display pop up dialog
-            echo "<script>alert('Registration successful')</script>";
+                        //md5 password
+                        $password = md5($password);
 
-            //back to login page
-            echo "<a href='login.php'>Login</a>";
-        } else {
-            echo "Registration failed";
-        }
+                        //prepare and bind 
+                        $sql = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+                        $sql->bind_param("sss", $name, $email, $password);
+                        $sql->execute();
 
-        $conn->close();
-    }
+                        if ($sql->affected_rows > 0) {
+                            //display pop up dialog
+                            echo "<script>alert('Registration successful')</script>";
+
+                            //back to login page
+                            echo "<a href='login.php'>Login</a>";
+                        } else {
+                            echo "Registration failed";
+                        }
+
+                        $conn->close();
+                    }
 
     ?>
 

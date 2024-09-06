@@ -10,7 +10,7 @@ function validateForm() {
         return false;
     }
     if (!validatePassword(password.value)) {
-        alert("Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number and one special character.");
+        alert("Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter and one number.");
         password.focus();
         return false;
     }
@@ -18,17 +18,16 @@ function validateForm() {
 }
 
 function validateEmail(email) {
-    const re = /\S+@\S+\.\S+/;
+    var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
-function validatePassword(password) {
-    if (password.length > 8 &&
-        password.match(/[a-z]/) &&
-        password.match(/[A-Z]/) &&
-        password.match(/[0-9]/) &&
-        password.match(/[!@#$%^&*()_\[\]{}?]/))   // special characters like ! @ # $ % ^ & * ( ) _ [ ] { } ?
-            return true;
-    return false;
+function validatePassword(password) { // Password must be >=8 and have least one upper, lowercase , one number and one special character
+    return password.length >= 8 &&
+            /[a-z]/.test(password) &&
+            /[A-Z]/.test(password) &&
+            /[0-9]/.test(password);
 
 }
+
+
