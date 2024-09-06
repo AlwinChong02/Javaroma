@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../WebStyle/mystyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Content Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            margin-top: 140px;
+            padding-left: 50px;
+        }
+
+        .sidebar {
+            width: 200px;
+            padding: 20px;
+            height: 100vh;
+            margin-right: 30px;
+            margin-top: 60px;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #004080;
+        }
+
+        .sidebar .navigation-item {
+            margin-bottom: 15px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a:hover {
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-right: 50px;
+            animation: fade-up 1.0s ease forwards;
+        }
+
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* Set to 4 products per row */
+            gap: 30px;
+            /* Increase space between products */
+        }
+
+        .product-item {
+            background-color: #FFF;
+            padding: 25px;
+            /* Increase padding to make products larger */
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            height: 100%;
+            /* Ensure all product items have the same height */
+            cursor: pointer;
+        }
+
+        .product-item img {
+            max-width: 180px;
+            /* Increase the size of the images */
+            max-height: 230px;
+            /* Adjust the height accordingly */
+            margin: 0 auto;
+            /* Center the images horizontally */
+            display: block;
+            border-radius: 10px;
+        }
+
+        .product-name {
+            margin-top: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .product-name::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+            margin-top: 50px;
+            /* Increase this value to add more space */
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+        }
+
+        .temperature-icons {
+            margin-top: 75px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            /* Space between icons */
+        }
+
+        .temperature-icons img {
+            width: 20px;
+            height: auto;
+        }
+
+        h3 {
+            font-size: 25px;
+            color: #004080;
+            margin: 10px;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: #004080;
+            margin: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 150px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+            animation: fade-up 0.5s ease forwards;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header img {
+            max-width: 150px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .modal-description {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f4f8fc;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .modal-ingredients {
+            margin-left: 40px;
+            margin-top: 20px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .modal-ingredients div {
+            width: 45%;
+        }
+
+        .modal-ingredients h4 {
+            text-decoration: underline;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-ingredients ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .modal-ingredients ul li {
+            margin-bottom: 5px;
+        }
+
+        .modal-quantity {
+            margin-top: 20px;
+        }
+
+        .modal-quantity label {
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .modal-quantity input {
+            font-size: 18px;
+        }
+
+        .modal-cart {
+            margin-top: 20px;
+        }
+
+        .modal-cart button {
+            background-color: #004080;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .modal-cart button:hover {
+            background-color: #002d66;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <header class="header">
+            <a href="/Javaroma/index.php" class="logo"><img src="/Javaroma/logo.png" alt="JavaRoma" width="110" height="100"></a>
+            <a href="/Javaroma/index.php" class="logoname"><img src="/Javaroma/JavaRomaLogo.png" alt="JavaRoma"></a>
+            <nav class="topNavigation">
+                <a href="/Javaroma/menu">Menu</a>
+                <a href="/Javaroma/founderNaboutus">About Us</a>
+                <a href="/Javaroma/contactPage">Contact Page</a>
+                <a href="/Javaroma/rewardPage" id="rewardBtn">Rewards</a>
+                <a href="/Javaroma/findAstore/index.php">Find a Store</a>
+            </nav>
+        </header>    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>DRINKS</h2>
+            <div class="navigation-item">
+                <a href="?category=All">All</a>
+            </div>
+            <div class="navigation-item"><a href="?category=Kuching+Meow">Kuching Meow</a></div><div class="navigation-item"><a href="?category=Coffee">Coffee</a></div><div class="navigation-item"><a href="?category=Non-Coffee">Non-Coffee</a></div><div class="navigation-item"><a href="?category=Frapp%C3%A9">Frappé</a></div>        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h3>Drinks</h3>
+            <h1>All</h1>
+            <div class="product-gallery">
+                <div class="product-item" onclick="openModal('Matcha Maven.png', 'Matcha Maven', 'Savor the vivid embrace of Matcha Maven, a skillfully made matcha latte that combines the contemporary flare of artisanal coffee culture with the age-old Japanese tea ceremony', 'Dairy Milk, Cham, Kuching Meow Matcha', '15.90')"><img src="../images/drinks/Matcha Maven.png" alt="Matcha Maven"><div class="product-name">Matcha Maven</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Hazel Harmony.png', 'Hazel Harmony', 'With its rich, roasted scent and smooth flavor, Hazel Harmony is a hojicha latte that transports you to a world of warmth and coziness. Hojicha, a drink made from roasted green tea leaves, has a rich, earthy flavor with hints of caramel and hazelnut that ', 'Dairy Milk, Hazelnut, Cham, Kuching Meow Hojicha', '15.90')"><img src="../images/drinks/Hazel Harmony.png" alt="Hazel Harmony"><div class="product-name">Hazel Harmony</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Mamak Magic.png', 'Mamak Magic', 'Mamak Magic is an experience that takes you to the busy streets of Malaysia, where families and friends come to eat their favorite mamak dishes. It’s more than simply a drink. The creamy milk flavor along with the deep amber hue of the tea embodies the co', 'Dairy Milk, Cham, Kuching Meow Milk Tea', '15.90')"><img src="../images/drinks/Mamak Magic.png" alt="Mamak Magic"><div class="product-name">Mamak Magic</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Blue Velvet.png', 'Blue Velvet', 'The flowery, somewhat earthy flavors of blue velvet perfectly balance the creamy richness of milk to create a velvety smooth latte that relaxes and delights the palate. Blue velvet is more than simply a visual feast. As the milk and deep blue tea swirl to', 'Dairy Milk, Cham, Vanilla Extract, Kuching Meow Butterfly Pea Flowers', '15.90')"><img src="../images/drinks/Blue Velvet.png" alt="Blue Velvet"><div class="product-name">Blue Velvet</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Americano.png', 'Americano', 'A shot of Espresso with a deep-tan crema that’s smooth and robust and perfectly preserved for your enjoyment.', 'Espresso', '6.90')"><img src="../images/drinks/Americano.png" alt="Americano"><div class="product-name">Americano</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Australian Chocolate.png', 'Australian Chocolate', 'A rich & chocolatey experience made with Australian Cocoa, that’s beautifully balanced between the dark & light milky flavour.', 'Milk, Cocoa', '12.90')"><img src="../images/drinks/Australian Chocolate.png" alt="Australian Chocolate"><div class="product-name">Australian Chocolate</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Cappuccino.png', 'Cappuccino', 'Like drinking delicious coffee bubbles, for those who enjoy it extra foamy. With lesser milk & more foam, if you like your coffee strong, the Cappuccino is the way to go.', 'Espresso, Milk', '9.90')"><img src="../images/drinks/Cappuccino.png" alt="Cappuccino"><div class="product-name">Cappuccino</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Caramel Cream Frappe.png', 'Caramel Cream Frappe', 'Specially made for our sweet coffee lovers! Imagine drinking your favourite caramel toffee dessert in an ice-blended fashion, yum!', 'Milk, Caramel syrup', '14.90')"><img src="../images/drinks/Caramel Cream Frappe.png" alt="Caramel Cream Frappe"><div class="product-name">Caramel Cream Frappe</div><div class="temperature-icons"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Caramel Macchiato.png', 'Caramel Macchiato', 'A rich blend of espresso and velvety steamed milk topped with a caramel drizzle.', 'Espresso, Milk, Caramel Syrup', '11.90')"><img src="../images/drinks/Caramel Macchiato.png" alt="Caramel Macchiato"><div class="product-name">Caramel Macchiato</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Cocoa Mocha Frappé.png', 'Cocoa Mocha Frappé', 'Rich mocha blended with ice and topped with whipped cream and a mocha drizzle.', 'Espresso, Cocoa, Milk', '14.90')"><img src="../images/drinks/Cocoa Mocha Frappé.png" alt="Cocoa Mocha Frappé"><div class="product-name">Cocoa Mocha Frappé</div><div class="temperature-icons"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Creamy Mango.png', 'Creamy Mango', 'A creamy, tropical delight made with fresh mango puree.', 'Mango, Peach, Milk', '9.90')"><img src="../images/drinks/Creamy Mango.png" alt="Creamy Mango"><div class="product-name">Creamy Mango</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Espresso Frappe.png', 'Espresso Frappe', 'A bold shot of espresso blended with ice and topped with whipped cream.', 'Espresso, Milk, Vanilla Syrup', '14.90')"><img src="../images/drinks/Espresso Frappe.png" alt="Espresso Frappe"><div class="product-name">Espresso Frappe</div><div class="temperature-icons"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('French Vanilla Chocolate.png', 'French Vanilla Chocolate', 'A rich and creamy chocolate experience with a hint of French vanilla.', 'Milk, Cocoa, Vanilla Syrup', '12.90')"><img src="../images/drinks/French Vanilla Chocolate.png" alt="French Vanilla Chocolate"><div class="product-name">French Vanilla Chocolate</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Iced Cafe Mocha.png', 'Cafe Mocha', 'This mixture of chocolate & coffee has won the hearts of many. For rich dessert lovers. Crafted with 100% Australian Chocolate (40% Cocoa).', 'Espresso, Chocolate, Milk', '12.90')"><img src="../images/drinks/Iced Cafe Mocha.png" alt="Cafe Mocha"><div class="product-name">Cafe Mocha</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Iced Coconut Latte.png', 'Coconut Latte', 'This coco loco sensation has it all –it’s cool, it’s fresh, and it’s downright addictive! Crafted especially for hot and humid weather, this coffee offers a delightful coconutty flavour, enriched with a secret blend. It’s the perfect way to beat the heat ', 'Sweet Milk, Textured Milk, Barista Coconut Milk, Espresso', '10.90')"><img src="../images/drinks/Iced Coconut Latte.png" alt="Coconut Latte"><div class="product-name">Coconut Latte</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Iced Latte.png', 'Latte', 'For those who enjoy their coffee on the milky side. Milk is frothed between temperatures of 69-72ºC, optimum to a Barista’s touch and akin to the temperature that is suitable for our customers to drink immediately upon serving.', 'Espresso, Milk', '9.90')"><img src="../images/drinks/Iced Latte.png" alt="Latte"><div class="product-name">Latte</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Japanese Matcha Frappé.png', 'Japanese Matcha Frappé', 'A refreshing blend of Japanese matcha and ice.', 'Matcha, Milk', '14.90')"><img src="../images/drinks/Japanese Matcha Frappé.png" alt="Japanese Matcha Frappé"><div class="product-name">Japanese Matcha Frappé</div><div class="temperature-icons"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Java Chip Frappé.png', 'Java Chip Frappé', 'A rich blend of coffee, chocolate chips, and ice.', 'Espresso, Chocolate Chips, Milk', '14.90')"><img src="../images/drinks/Java Chip Frappé.png" alt="Java Chip Frappé"><div class="product-name">Java Chip Frappé</div><div class="temperature-icons"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Matcho Latté.png', 'Matcho Latté', 'A smooth and creamy matcha latte.', 'Milk, Green Tea Powder, Catcher - Chocolate Sauce', '9.90')"><img src="../images/drinks/Matcho Latté.png" alt="Matcho Latté"><div class="product-name">Matcho Latté</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Roasted Hazelnut Chocolate.png', 'Roasted Hazelnut Chocolate', 'A rich hazelnut-flavored chocolate drink.', 'Hazelnut Syrup, Cocoa, Milk', '12.90')"><img src="../images/drinks/Roasted Hazelnut Chocolate.png" alt="Roasted Hazelnut Chocolate"><div class="product-name">Roasted Hazelnut Chocolate</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Roasted Hazelnut Latte.png', 'Roasted Hazelnut Latte', 'A creamy latte with a hint of roasted hazelnut.', 'Espresso, Milk, Hazelnut Syrup', '10.90')"><img src="../images/drinks/Roasted Hazelnut Latte.png" alt="Roasted Hazelnut Latte"><div class="product-name">Roasted Hazelnut Latte</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Salted Caramel Chocolate.png', 'Salted Caramel Chocolate', 'A deliciously rich salted caramel chocolate drink.', 'Milk, Cocoa, Salted Caramel Syrup', '12.90')"><img src="../images/drinks/Salted Caramel Chocolate.png" alt="Salted Caramel Chocolate"><div class="product-name">Salted Caramel Chocolate</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Salted Caramel Frappé.png', 'Salted Caramel Frappé', 'A sweet and salty caramel frappé.', 'Milk, Espresso, Salted Caramel Syrup', '14.90')"><img src="../images/drinks/Salted Caramel Frappé.png" alt="Salted Caramel Frappé"><div class="product-name">Salted Caramel Frappé</div><div class="temperature-icons"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Spanish Latte.png', 'Spanish Latte', 'A rich and creamy latte with a hint of Spanish flavor.', 'Espresso, Sweet Milk, Textured Milk, Full Cream Milk', '10.90')"><img src="../images/drinks/Spanish Latte.png" alt="Spanish Latte"><div class="product-name">Spanish Latte</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Vietnamese Spanish Latte.png', 'Vietnamese Spanish Latte', 'A sweet and creamy Vietnamese-style Spanish latte.', 'Sweet Milk, Textured Milk, Milk, Vietnamese Coffee Base, Coconut Cream', '10.90')"><img src="../images/drinks/Vietnamese Spanish Latte.png" alt="Vietnamese Spanish Latte"><div class="product-name">Vietnamese Spanish Latte</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Zero Frappe.png', 'Zero Frappe', 'A sugar-free frappé with a creamy texture.', 'Espresso, Oat, Almond, Soy, Vanilla Powder', '14.90')"><img src="../images/drinks/Zero Frappe.png" alt="Zero Frappe"><div class="product-name">Zero Frappe</div><div class="temperature-icons"><img src="../images/cold.png" alt="Cold Icon"></div></div><div class="product-item" onclick="openModal('Javaroma Lemonade.png', 'Javaroma Lemonade', 'A refreshing lemonade made with fresh lemons.', 'Lemon, Honey, Soda Water', '7.90')"><img src="../images/drinks/Javaroma Lemonade.png" alt="Javaroma Lemonade"><div class="product-name">Javaroma Lemonade</div><div class="temperature-icons"><img src="../images/hot.png" alt="Hot Icon"><img src="../images/cold.png" alt="Cold Icon"></div></div>            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="Product Image">
+            </div>
+            <div class="modal-title" id="modalTitle">Product Name</div>
+            <div class="modal-description" id="modalDescription">Product Description</div>
+            <div class="modal-ingredients">
+                <div>
+                    <h4>Ingredients</h4>
+                    <ul id="modalIngredients"></ul>
+                </div>
+                <div>
+                    <h4>Price</h4>
+                    <ul id="modalPrice"></ul>
+                </div>
+            </div>
+            <div class="modal-quantity">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 60px; text-align: center;">
+            </div>
+            <div class="modal-cart">
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addToCart() {
+            const quantity = document.getElementById('quantity').value;
+            const productName = document.getElementById('modalTitle').innerText;
+            const price = document.getElementById('modalPrice').innerText;
+
+            fetch('add_to_cart.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        productName: productName,
+                        quantity: quantity,
+                        price: price
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function openModal(image, title, description, ingredients, price) {
+            document.getElementById("modalImage").src = "../images/drinks/" + image;
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalDescription").innerText = description;
+
+            // Fill ingredients list
+            let ingredientsArray = ingredients.split(',');
+            let ingredientsList = document.getElementById("modalIngredients");
+            ingredientsList.innerHTML = ''; // Clear previous content
+            ingredientsArray.forEach(function(ingredient) {
+                let li = document.createElement("li");
+                li.innerText = ingredient;
+                ingredientsList.appendChild(li);
+            });
+
+            // Fill price
+            let priceList = document.getElementById("modalPrice");
+            priceList.innerHTML = ''; // Clear previous content
+            let li = document.createElement("li");
+            li.innerText = price;
+            priceList.appendChild(li);
+
+            document.getElementById("productModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("productModal").style.display = "none";
+        }
+
+        
+    </script>
+</body>
+
+</html>
