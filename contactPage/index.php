@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 if (isset($_SESSION['userID'])) {
     $userID = $_SESSION["userID"];
 } else {
-    die("Error: Required session variables are not set. Please log in and select a semester.");
+    die("Error: User not logged in. Please log in to submit feedback.");
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
