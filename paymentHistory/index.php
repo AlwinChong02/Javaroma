@@ -39,6 +39,7 @@ $orderResult = $stmtOrder->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment History</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='../WebStyle/mystyle.css'>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -52,7 +53,6 @@ $orderResult = $stmtOrder->get_result();
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
-            padding: 20px;
         }
 
         h2 {
@@ -60,6 +60,7 @@ $orderResult = $stmtOrder->get_result();
             font-size: 28px;
             color: #444;
             margin-bottom: 20px;
+            margin-top: 130px;
         }
 
         .order-history-table {
@@ -158,6 +159,7 @@ $orderResult = $stmtOrder->get_result();
     </style>
 </head>
 <body>
+    <?php include('../includes/navigationList.php'); ?>
     <h2>Payment History</h2>
 
     <table class="order-history-table">
@@ -227,5 +229,6 @@ $orderResult = $stmtOrder->get_result();
             }
         }
     </script>
+    <?php include('../includes/footerPolicy.php'); ?>
 </body>
 </html>
