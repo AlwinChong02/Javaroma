@@ -369,7 +369,7 @@ $resultProducts = $conn->query($sqlProducts);
                 <?php
                 if ($resultProducts->num_rows > 0) {
                     while ($product = $resultProducts->fetch_assoc()) {
-                        echo '<div class="product-item" onclick="openModal(\'' . basename($product['imagePath']) . '\', \'' . addslashes($product['productName']) . '\', \'' . addslashes($product['productDescription']) . '\', \'' . addslashes($product['ingredients']) . '\', \'' . addslashes($product['price']) . '\', \'' . addslashes($product['productID']) . '\')">';
+                        echo '<div class="product-item" onclick="openModal(\'' . basename($product['imagePath']) . '\', \'' . addslashes($product['productName']) . '\', \'' . addslashes($product['productDescription']) . '\', \'' . addslashes($product['ingredients']) . '\', \'' . addslashes($product['price']) . '\', \'' . addslashes($product['productID']) . '\', \'' . addslashes($product['productCategory']) . '\')">';
                         echo '<img src="../images/drinks/' . basename($product['imagePath']) . '" alt="' . $product['productName'] . '">';
                         echo '<div class="product-name">' . $product['productName'] . '</div>';
                         echo '<div class="temperature-icons">';
@@ -400,6 +400,7 @@ $resultProducts = $conn->query($sqlProducts);
                     <img id="modalImage" src="" alt="Product Image">
                 </div>
                 <input type="hidden" id="productID" name="productID" value="">
+                <input type="hidden" id="productCategory" name="productCategory" value="">
                 <div class="modal-title" id="modalTitle">Product Name</div>
                 <div class="modal-description" id="modalDescription">Product Description</div>
                 <div class="modal-ingredients">
@@ -426,6 +427,7 @@ $resultProducts = $conn->query($sqlProducts);
         <script>
             function addToCart() {
                 const productID = document.getElementById('productID').value;
+                const productCategory = document.getElementById('productCategory').value;
                 const quantity = document.getElementById('quantity').value;
                 const productName = document.getElementById('modalTitle').innerText;
                 const price = document.getElementById('modalPrice').innerText;
@@ -437,6 +439,7 @@ $resultProducts = $conn->query($sqlProducts);
                     },
                     body: JSON.stringify({
                         productID: productID,
+                        productCategory: productCategory,
                         productName: productName,
                         quantity: quantity,
                         price: price
@@ -449,8 +452,9 @@ $resultProducts = $conn->query($sqlProducts);
                     .catch(error => console.error('Error:', error));
             }
 
-            function openModal(image, title, description, ingredients, price, productID) {
+            function openModal(image, title, description, ingredients, price, productID, productCategory) {
                 document.getElementById("productID").value = productID;
+                document.getElementById("productCategory").value = productCategory;
                 document.getElementById("modalImage").src = "../images/drinks/" + image;
                 document.getElementById("modalTitle").innerText = title;
                 document.getElementById("modalDescription").innerText = description;
@@ -500,6 +504,7 @@ $resultProducts = $conn->query($sqlProducts);
 
 
         </script>
+    </div>
 </body>
 
 </html>
