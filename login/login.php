@@ -77,10 +77,17 @@
                         if ($hashedPassword === md5($password)) {
                             echo "Login successful";
                             session_start();
+                            $_SESSION["userID"] = $row['userID'];
+                            $_SESSION["username"] = $row['username'];
                             $_SESSION["email"] = $email;
+                            $_SESSION["password"] = $password;
+
 
                             // Do not store passwords in sessions or cookies in plain text
+                            setcookie('userID', $row['userID'], time() + 86400, "/", "localhost", true);
+                            setcookie('username', $row['username'], time() + 86400, "/", "localhost", true);
                             setcookie("email", $email, time() + 86400, "/", "localhost", true);
+                            setcookie("password", $password, time() + 86400, "/", "localhost", true);
                             header("Location: ../index.php");
                             exit();
                         } else {

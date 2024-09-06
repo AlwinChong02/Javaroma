@@ -93,12 +93,18 @@ $resultProducts = $conn->query($sqlProducts);
             animation: fade-up 1.0s ease forwards;
         }
 
+        #drinks-title {
+            font-size: 36px;
+            color: #004080;
+            margin-bottom: 8px;
+            text-align: left;
+            margin-top: 0;
+        }
+
         .product-gallery {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            /* Set to 4 products per row */
             gap: 30px;
-            /* Increase space between products */
         }
 
         .product-item {
@@ -295,6 +301,30 @@ $resultProducts = $conn->query($sqlProducts);
         .modal-cart button:hover {
             background-color: #002d66;
         }
+
+        .search-container {
+            margin-bottom: 30px; 
+        }
+
+        /* Search Input */
+        #searchInput {
+            width: 100%;
+            max-width: 500px; 
+            padding: 15px 20px; 
+            font-size: 16px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /
+            transition: box-shadow 0.3s ease;   
+        }
+
+        /* Add a hover/focus effect to the input */
+        #searchInput:focus {
+            outline: none; /* Remove default outline */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add stronger shadow on focus */
+            border-color: #004080; /* Change border color to match theme */
+        }
+
     </style>
 </head>
 
@@ -323,9 +353,18 @@ $resultProducts = $conn->query($sqlProducts);
 
         <!-- Main Content -->
         <div class="main-content">
-            <h3>Drinks</h3>
-            <h1><?php echo $selectedCategory; ?></h1>
-            <div class="product-gallery">
+            <!-- Drinks Heading -->
+            <h2 id="drinks-title">Drinks</h2>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <form id="searchForm" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search drinks..." onkeyup="searchProducts()">
+                </form>
+            </div>
+
+            <!-- Product Gallery -->
+            <div id="productGallery" class="product-gallery">
                 <?php
                 if ($resultProducts->num_rows > 0) {
                     while ($product = $resultProducts->fetch_assoc()) {
@@ -334,7 +373,6 @@ $resultProducts = $conn->query($sqlProducts);
                         echo '<div class="product-name">' . $product['productName'] . '</div>';
                         echo '<div class="temperature-icons">';
 
-                        // Display icons based on product category
                         if ($product['productCategory'] == 'Frappé') {
                             echo '<img src="../images/cold.png" alt="Cold Icon">';
                         } else {
@@ -342,8 +380,8 @@ $resultProducts = $conn->query($sqlProducts);
                             echo '<img src="../images/cold.png" alt="Cold Icon">';
                         }
 
-                        echo '</div>'; // Close temperature-icons
-                        echo '</div>'; // Close product-item
+                        echo '</div>';
+                        echo '</div>';
                     }
                 } else {
                     echo "No products found.";
@@ -351,7 +389,7 @@ $resultProducts = $conn->query($sqlProducts);
                 ?>
             </div>
         </div>
-    </div>
+
 
     <!-- The Modal -->
     <div id="productModal" class="modal">
@@ -441,7 +479,24 @@ $resultProducts = $conn->query($sqlProducts);
             document.getElementById("productModal").style.display = "none";
         }
 
-        
+        function searchProducts() {
+            let searchQuery = document.getElementById('searchInput').value;
+
+            // Create an AJAX request
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Update the product gallery with the filtered results
+                    document.getElementById("productGallery").innerHTML = this.responseText;
+                }
+            };
+
+            // Send the request to searchProducts.php with the search query
+            xhttp.open("GET", "searchProducts.php?query=" + encodeURIComponent(searchQuery), true);
+            xhttp.send();
+        }
+
+
     </script>
 </body>
 
