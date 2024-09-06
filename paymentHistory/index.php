@@ -14,23 +14,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get selected category from URL or show all if none is selected
-$selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'All';
-
-// Fetch all product categories
-$sqlCategories = "SELECT DISTINCT productCategory FROM product";
-$resultCategories = $conn->query($sqlCategories);
-
-// Fetch products based on the selected category
-if ($selectedCategory == 'All') {
-    $sqlProducts = "SELECT productID, productName, productDescription, imagePath, productCategory, ingredients, price FROM product";
-} else {
-    $sqlProducts = "SELECT productID, productName, productDescription, imagePath, productCategory, ingredients, price FROM product WHERE productCategory = '$selectedCategory'";
-}
-
-$resultProducts = $conn->query($sqlProducts);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
