@@ -14,6 +14,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+if (isset($_SESSION['userID'])) {
+    $userID = $_SESSION["userID"];
+} else {
+    die("Error: User not logged in. Please log in to add products.");
+}
+
 // Handle Proceed to Checkout action
 if (isset($_POST['checkout'])) {
     if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
@@ -24,9 +30,6 @@ if (isset($_POST['checkout'])) {
             $itemTotal = $item['quantity'] * $item['price'];
             $totalPrice += $itemTotal;
         }
-
-        // Step 1: Insert into the 'orders' table
-        $userID = 1; // Replace with actual user ID if available
         $orderDate = date('Y-m-d H:i:s');
 
         // Modify the INSERT statement to include totalAmount
