@@ -3,12 +3,14 @@ session_start();
 
 // Fetch the data sent from the JavaScript function
 $data = json_decode(file_get_contents('php://input'), true);
+$productID = $data['productID'];
 $productName = $data['productName'];
 $quantity = $data['quantity'];
 $price = $data['price'];
 
 // Create an item array
 $item = array(
+    'ID' => &$productID,
     'name' => $productName,
     'quantity' => $quantity,
     'price' => $price
@@ -22,7 +24,7 @@ if (!isset($_SESSION['cart'])) {
 // Check if the product is already in the cart, update quantity if so
 $found = false;
 foreach ($_SESSION['cart'] as &$cartItem) {
-    if ($cartItem['name'] == $productName) {
+    if ($cartItem['ID'] == $productID) {
         $cartItem['quantity'] += $quantity;
         $found = true;
         break;
