@@ -17,8 +17,8 @@
             <div class="profile-dropdown">
                 <a href="/Javaroma/account/profile.php">Profile</a>
                 <a href="/Javaroma/paymentHistory">Payment History</a>
-                <a href="/Javaroma/account/login.php">Login</a>
-                <a href="/Javaroma/logout">Logout</a>
+                <a href="/Javaroma/account/index.php">Login</a>
+                <a href="/Javaroma/logout.php">Logout</a>
             </div>
         </div>
         <!-- <a href="/Javaroma/login/login.php" class="logo"><img src='/Javaroma/images/profile_icon.jpg' style="max-width: 18px;"/></a> -->
