@@ -71,3 +71,10 @@ for (let i = 0; i < toggles.length; i++) {
         }
     });
 }
+
+// Add event listener for profile icon
+document.querySelector('.profile-icon').addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.profile-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    event.preventDefault(); // Prevents link from being followed
+});
