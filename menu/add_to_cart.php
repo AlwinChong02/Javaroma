@@ -4,6 +4,7 @@ session_start();
 // Fetch the data sent from the JavaScript function
 $data = json_decode(file_get_contents('php://input'), true);
 $productID = $data['productID'];  // Get productID
+$productCategory = $data['productCategory'];
 $productName = $data['productName'];
 $quantity = $data['quantity'];
 $price = $data['price'];
@@ -11,6 +12,7 @@ $price = $data['price'];
 // Create an item array
 $item = array(
     'id' => $productID,  // Add productID to the item
+    'category' => $productCategory,
     'name' => $productName,
     'quantity' => $quantity,
     'price' => $price,

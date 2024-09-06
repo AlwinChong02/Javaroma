@@ -51,6 +51,7 @@ if (isset($_POST['checkout'])) {
         // Get the last inserted orderID
         $orderID = $conn->insert_id;
 
+       
         // Step 2: Insert into 'orderItems' table for each product in the cart
         foreach ($_SESSION['cart'] as &$item) {
             // Set the selected temperature in the session for each item
@@ -58,6 +59,7 @@ if (isset($_POST['checkout'])) {
 
             // Now save to the database
             $productID = $item['id'];
+            $category = $item['category'];
             $quantity = $item['quantity'];
             $price = $item['price'];
             $temperature = $item['temperature'];  // Get the selected temperature
@@ -236,19 +238,21 @@ if (isset($_POST['checkout'])) {
             foreach ($_SESSION['cart'] as $key => $item):
                 $itemTotal = $item['quantity'] * $item['price'];
                 $totalPrice += $itemTotal;
+
+                $isFrappe = (isset($item['category']) && $item['category'] == 'Frappé');
                 ?>
                 <tr>
-                    <td><?php echo $item['name']; ?>
-
-                    </td>
+                    <td><?php echo $item['name']; ?></td>
                     <td>
                         <select name="temperature[<?php echo $item['id']; ?>]" required form="checkout-form">
                             <option value="" disabled selected hidden>Hot/Cold</option>
-                            <option value="Hot" <?php if ($item['temperature'] == 'Hot')
-                                echo 'selected'; ?>>Hot</option>
-                            <option value="Cold" <?php if ($item['temperature'] == 'Cold')
+                            <option value="Hot" <?php if ($item['temperature'] == 'Hot') echo 'selected'; ?> <?php if ($isFrappe) echo 'disabled'; ?>>Hot</option>
+                            <option value="Cold" <?php if ($item['temperature'] == 'Cold' || $isFrappe)
                                 echo 'selected'; ?>>Cold</option>
                         </select>
+                        <?php if ($isFrappe): ?>
+                            <p style="color:red;">Frappe drinks are only available cold.</p>
+                        <?php endif; ?>
                     </td>
                     <td>
                         <!-- Quantity input -->

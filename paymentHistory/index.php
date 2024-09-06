@@ -21,11 +21,14 @@ if (isset($_SESSION['userID'])) {
 }
 
 // Retrieve orders for the logged-in user
-$sqlOrders = "SELECT * FROM orders WHERE userID = ?";
-$stmtOrders = $conn->prepare($sqlOrders);
-$stmtOrders->bind_param("i", $userID);
-$stmtOrders->execute();
-$resultOrders = $stmtOrders->get_result();
+$orderQuery = "SELECT o.orderID, o.userID, o.totalAmount, o.orderDate, oi.orderItemsID, oi.quantity, oi.temperature, p.productID, p.productName, p.imagePath
+FROM orders o
+JOIN orderItems oi ON o.orderID = oi.orderID
+JOIN product p ON oi.productID = p.productID
+WHERE o.userID = $userID";
+
+$orderResult = $conn->query($orderQuery);
+$orders = $orderResult->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -66,17 +69,15 @@ $resultOrders = $stmtOrders->get_result();
             <th>Order Date</th>
             <th>Details</th>
         </tr>
-
-        <?php while ($order = $resultOrders->fetch_assoc()): ?>
             <tr>
-                <td><?php echo $order['orderID']; ?></td>
+                <td><?php echo htmlspecialchars ($orders['orderID']); ?></td>
                 <td><?php echo number_format($order['totalAmount'], 2); ?></td>
-                <td><?php echo $order['orderDate']; ?></td>
+                <td><?php echo $orders['orderDate']; ?></td>
                 <td>
-                    <button onclick="toggleDetails(<?php echo $order['orderID']; ?>)">View Items</button>
+                    <button onclick="toggleDetails(<?php echo $orders['orderID']; ?>)">View Items</button>
                 </td>
             </tr>
-            <tr class="order-items" id="order-items-<?php echo $order['orderID']; ?>" style="display: none;">
+            <tr class="order-items" id="order-items-<?php echo $orders['orderID']; ?>" style="display: none;">
                 <td colspan="4">
                     <ul>
                         <?php
@@ -94,7 +95,6 @@ $resultOrders = $stmtOrders->get_result();
                     </ul>
                 </td>
             </tr>
-        <?php endwhile; ?>
 
     </table>
 
