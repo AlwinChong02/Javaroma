@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Step 2: Insert into 'orderItems' table for each product in the cart
         foreach ($_SESSION['cart'] as $item) {
-            $productID = $item['id']; // Assuming you have a product ID in your cart session
+            $productID = $item['id']; // Using the productID in the session cart
             $quantity = $item['quantity'];
             $price = $item['price'];
             $temperature = isset($item['temperature']) ? $item['temperature'] : '';
@@ -121,13 +121,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <td><?php echo $item['price']; ?></td>
                     <td><?php echo $itemTotal; ?></td>
                     <td>
+                        <!-- Update cart form -->
                         <form action="update_cart.php" method="POST">
-                            <input type="hidden" name="product_name" value="<?php echo $item['name']; ?>">
+                            <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <input type="number" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
                             <button type="submit">Update</button>
                         </form>
+                        <!-- Remove from cart form -->
                         <form action="remove_from_cart.php" method="POST">
-                            <input type="hidden" name="product_name" value="<?php echo $item['name']; ?>">
+                            <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
                     </td>
