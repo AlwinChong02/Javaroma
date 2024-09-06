@@ -19,10 +19,10 @@
             <div class="login-box">
                 <h2>Sign in</h2>
                 <p>Don't have an account? <a href="register.php">Register here!</a></p>
-                <form id="login-form" action="login.php" method="post" onsubmit="validateForm()">
+                <form id="login-form" action="index.php" method="post" onsubmit="validateForm()">
                     <div class=" input-box">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email address">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address">
                     </div>
                     <div class="input-box">
                         <label for="password">Password</label>
@@ -69,14 +69,14 @@
                         $row = $result->fetch_assoc();
                         $hashedPassword = $row['password'];
                         // echo "Hashed password: " . $hashedPassword . "<br>";
-
+                
                         // Verify password
                         if ($hashedPassword === md5($password)) {
 
                             echo "Login successful";
                             session_start();
 
-                            $_SESSION["userID"] = $row['userID']; 
+                            $_SESSION["userID"] = $row['userID'];
                             $_SESSION["username"] = $row['username'];
                             $_SESSION["email"] = $email;
                             $_SESSION["password"] = $password;
@@ -90,7 +90,7 @@
                             exit();
                         } else {
                             echo "Login failed: Invalid password";
-                            
+
                         }
                     } else {
                         echo "Login failed: User not found";

@@ -16,9 +16,9 @@
         <div class="right">
             <div class="login-box">
                 <h1>Register</h1>
-                <p>Have existing account? <a href="login.php">Login now!</a></p>
+                <p>Have existing account? <a href="index.php">Login now!</a></p>
 
-                <form id="register-form" action="register.php" method="post" onsubmit="validateForm()">
+                <form id="register-form" action="register.php" method="post" onsubmit="return validateForm()">
                     <div class="input-box">
                         <label for="name">Name:</label>
                         <input type="text" name="name" id="name">

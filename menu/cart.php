@@ -14,6 +14,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+if (isset($_SESSION['userID'])) {
+    $userID = $_SESSION["userID"];
+} else {
+    die("Error: User not logged in. Please log in to add products.");
+}
+
 // Handle Proceed to Checkout action
 if (isset($_POST['checkout'])) {
     if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
@@ -24,9 +30,6 @@ if (isset($_POST['checkout'])) {
             $itemTotal = $item['quantity'] * $item['price'];
             $totalPrice += $itemTotal;
         }
-
-        // Step 1: Insert into the 'orders' table
-        $userID = 1; // Replace with actual user ID if available
         $orderDate = date('Y-m-d H:i:s');
 
         // Modify the INSERT statement to include totalAmount
@@ -233,7 +236,7 @@ if (isset($_POST['checkout'])) {
             foreach ($_SESSION['cart'] as $key => $item):
                 $itemTotal = $item['quantity'] * $item['price'];
                 $totalPrice += $itemTotal;
-            ?>
+                ?>
                 <tr>
                     <td><?php echo $item['name']; ?>
 
@@ -241,8 +244,10 @@ if (isset($_POST['checkout'])) {
                     <td>
                         <select name="temperature[<?php echo $item['id']; ?>]" required form="checkout-form">
                             <option value="" disabled selected hidden>Hot/Cold</option>
-                            <option value="Hot" <?php if ($item['temperature'] == 'Hot') echo 'selected'; ?>>Hot</option>
-                            <option value="Cold" <?php if ($item['temperature'] == 'Cold') echo 'selected'; ?>>Cold</option>
+                            <option value="Hot" <?php if ($item['temperature'] == 'Hot')
+                                echo 'selected'; ?>>Hot</option>
+                            <option value="Cold" <?php if ($item['temperature'] == 'Cold')
+                                echo 'selected'; ?>>Cold</option>
                         </select>
                     </td>
                     <td>
@@ -261,6 +266,7 @@ if (isset($_POST['checkout'])) {
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
+                        </div>
                         </div>
                     </td>
                     <td>RM <?php echo $item['price']; ?></td>

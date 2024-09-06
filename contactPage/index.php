@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,14 +13,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+if (isset($_SESSION['userID'])) {
+    $userID = $_SESSION["userID"];
+} else {
+    die("Error: User not logged in. Please log in to submit feedback.");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userID = mysqli_real_escape_string($conn, $_POST['userID']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $ratings = mysqli_real_escape_string($conn, $_POST['ratings']);
     $date = date('Y-m-d'); // Automatically sets today's date
 
     // Insert query
-    $sql = "INSERT INTO feedback (userID, description, ratings, date) VALUES ('$123', '$description', '$ratings', '$date')";
+    $sql = "INSERT INTO feedback (userID, description, ratings, date) VALUES ('$userID', '$description', '$ratings', '$date')";
 
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Feedback submitted successfully!'); window.location.href = '../index.php';</script>";
@@ -89,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 10px;
             justify-content: center;
             align-items: center;
-            display: flex;  
+            display: flex;
         }
 
         h1 {
@@ -141,7 +147,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 5px;
         }
 
-        .form-field, .ratings-select {
+        .form-field,
+        .ratings-select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -180,7 +187,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 padding: 30px;
             }
 
-            .col-1, .col-2 {
+            .col-1,
+            .col-2 {
                 width: 100%;
                 margin-bottom: 20px;
             }
@@ -229,7 +237,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h2>Submit Your Feedback</h2>
                     <div class="form-row">
                         <label for="description">Feedback Description</label>
-                        <textarea id="description" name="description" class="form-field" placeholder="Write your feedback here..." required></textarea>
+                        <textarea id="description" name="description" class="form-field"
+                            placeholder="Write your feedback here..." required></textarea>
                     </div>
                     <div class="form-row">
                         <label for="ratings">Ratings (1-5)</label>
