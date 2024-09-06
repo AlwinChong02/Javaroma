@@ -92,57 +92,126 @@ if (isset($_POST['checkout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../WebStyle/mystyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Cart</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #353432;
+            margin-bottom: 20px;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
         .cart-table {
-            width: 80%;
+            width: 90%;
+            max-width: 1200px;
             margin: auto;
             border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .cart-table th,
         .cart-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            padding: 15px;
+            text-align: center;
         }
 
         .cart-table th {
-            background-color: #f4f4f4;
+            background-color: #353432;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .cart-table td {
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cart-table td img {
+            max-width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* Table row hover effect */
+        .cart-table tr:hover {
+            background-color: #f9f9f9;
         }
 
         .cart-buttons {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
         }
 
         .cart-buttons button {
-            padding: 10px 20px;
-            background-color: #004080;
-            color: white;
+            padding: 8px 15px;
+            background-color: #353432;
+            color: #eee;
+            border-radius: 30px;
             border: none;
             cursor: pointer;
-            margin: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         .cart-buttons button:hover {
-            background-color: #002d66;
+            background-color: #555;
         }
 
-        /* Flexbox layout for buttons */
         .cart-actions {
             display: flex;
             gap: 10px;
-            justify-content: flex-start;
             align-items: center;
         }
 
-        .cart-actions form {
-            display: inline;
+        form {
+            margin: 0;
+            padding: 0;
         }
 
+
         .quantity-input {
-            display: block;
-            margin-bottom: 10px;
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* Total Price row */
+        .cart-table tr:last-child {
+            font-weight: bold;
+            background-color: #f2f2f2;
+            color: #353432;
+        }
+
+        /* Select box styling */
+        select {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            font-size: 14px;
+            width: 80px;
         }
     </style>
 </head>
@@ -166,7 +235,9 @@ if (isset($_POST['checkout'])) {
                 $totalPrice += $itemTotal;
             ?>
                 <tr>
-                    <td><?php echo $item['name']; ?></td>
+                    <td><?php echo $item['name']; ?>
+
+                    </td>
                     <td>
                         <select name="temperature[<?php echo $item['id']; ?>]" required form="checkout-form">
                             <option value="" disabled selected hidden>Hot/Cold</option>
@@ -179,7 +250,7 @@ if (isset($_POST['checkout'])) {
                         <form action="update_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <input type="number" class="quantity-input" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
-                        
+
                             <div class="cart-actions">
                                 <!-- Update cart form -->
                                 <button type="submit">Update</button>
@@ -190,7 +261,7 @@ if (isset($_POST['checkout'])) {
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
-                            </div>
+                        </div>
                     </td>
                     <td>RM <?php echo $item['price']; ?></td>
                     <td>RM <?php echo number_format($itemTotal, 2); ?></td>
@@ -210,10 +281,10 @@ if (isset($_POST['checkout'])) {
             <button type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
-        <p>Your cart is empty.</p>
-        <button onclick="window.location.href='index.php'">Continue Shopping</button>
+        <h2>Your cart is empty.</h2>
+        <div class="cart-buttons">
+        <button onclick="window.location.href='index.php'">Continue Shopping</button></div>
     <?php endif; ?>
 </body>
 
 </html>
-

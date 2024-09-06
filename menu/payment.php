@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>The Generics</title>
+    <title>Payment</title>
     <meta name="description" content="This is the description">
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" />
@@ -138,7 +138,7 @@
                             </div>
                             <div class="input-box">
                                 <span>Zip Code :</span>
-                                <input type="text" id="zip" placeholder="123 456" pattern="\d{5}" required />
+                                <input type="text" id="zip" placeholder="12000" pattern="\d{5}" required />
                             </div>
                         </div>
 
@@ -184,6 +184,7 @@
 
             var cardNumber = document.getElementById("cardNumber").value;
             var cvv = document.getElementById("cvv").value;
+            var expDate = document.getElementById("expDate").value;
 
             if (cardNumber.length !== 16 || isNaN(cardNumber)) {
                 event.preventDefault();
@@ -194,6 +195,22 @@
                 event.preventDefault();
                 errorMessages.innerHTML += "<p>Please enter a valid 3-digit CVV.</p>";
             }
+            var expDateRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+            if (!expDateRegex.test(expDate)) {
+                event.preventDefault();
+                errorMessages.innerHTML += "<p>Please enter a valid expiry date in MM/YY format.</p>";
+            } else {
+                var today = new Date();
+                var month = parseInt(expDate.split("/")[0], 10);
+                var year = parseInt("20" + expDate.split("/")[1], 10);
+
+                if (year < today.getFullYear() || (year === today.getFullYear() && month < (today.getMonth() + 1))) {
+                    event.preventDefault();
+                    errorMessages.innerHTML += "<p>Please enter a valid future expiry date.</p>";
+                }
+            }
+            alert("Payment is successful!");
+            window.location.href = "index.php";
         });
     </script>
 </body>
