@@ -2,11 +2,10 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $productName = $_POST['product_name'];
+    $productID = $_POST['product_id'];
 
-    // Loop through the cart to find the product and remove it
     foreach ($_SESSION['cart'] as $key => $cartItem) {
-        if ($cartItem['name'] == $productName) {
+        if ($cartItem['id'] == $productID) {
             unset($_SESSION['cart'][$key]);
             break;
         }
@@ -19,4 +18,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: cart.php');
     exit();
 }
-?>
