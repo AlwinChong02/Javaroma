@@ -12,7 +12,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-
         }
 
         .container {
@@ -70,7 +69,7 @@
 
         .flex .input-box {
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
 
         .flex .input-box {
@@ -100,47 +99,46 @@
         .btn:hover {
             background: #282532;
         }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div>
-            <form method="post">
+            <form id="paymentForm">
                 <div class="row">
                     <div class="column">
                         <h3 class="title">Billing Address</h3>
                         <div class="input-box">
                             <span>Full name :</span>
-                            <input type="text"
-                                placeholder="Jacob Aiden" />
+                            <input type="text" id="name" placeholder="Jacob Aiden" required />
                         </div>
                         <div class="input-box">
                             <span>Email :</span>
-                            <input type="text"
-                                placeholder="example@gmail.com" />
+                            <input type="email" id="email" placeholder="example@gmail.com" required />
                         </div>
                         <div class="input-box">
                             <span>Address :</span>
-                            <input type="text"
-                                placeholder="Room - Street - Locality" />
+                            <input type="text" id="address" placeholder="Room - Street - Locality" required />
                         </div>
                         <div class="input-box">
                             <span>City :</span>
-                            <input type="text"
-                                placeholder="Kajang" />
+                            <input type="text" id="city" placeholder="Kajang" required />
                         </div>
 
                         <div class="flex">
                             <div class="input-box">
                                 <span>State :</span>
-                                <input type="text"
-                                    placeholder="Selangor" />
+                                <input type="text" id="state" placeholder="Selangor" required />
                             </div>
                             <div class="input-box">
                                 <span>Zip Code :</span>
-                                <input type="text"
-                                    placeholder="123 456" />
+                                <input type="text" id="zip" placeholder="123 456" pattern="\d{5}" required />
                             </div>
                         </div>
 
@@ -154,39 +152,50 @@
                         </div>
                         <div class="input-box">
                             <span>Name on Card :</span>
-                            <input type="text"
-                                placeholder="example@gmail.com" />
+                            <input type="text" id="cardName" placeholder="Full Name" required />
                         </div>
                         <div class="input-box">
                             <span>Credit Card Number :</span>
-                            <input type="number"
-                                placeholder="1234 1234 1234 1234" />
+                            <input type="text" id="cardNumber" placeholder="1234 1234 1234 1234" pattern="\d{16}" required />
                         </div>
                         <div class="input-box">
-                            <span>Exp. Month :</span>
-                            <input type="text"
-                                placeholder="August" />
+                            <span>Expiry date :</span>
+                            <input type="text" id="expDate" placeholder="01/24" required />
                         </div>
 
                         <div class="flex">
                             <div class="input-box">
-                                <span>Exp. Year :</span>
-                                <input type="text"
-                                    placeholder="2026" />
-                            </div>
-                            <div class="input-box">
                                 <span>CVV :</span>
-                                <input type="text"
-                                    placeholder="123" />
+                                <input type="text" id="cvv" placeholder="123" pattern="\d{3}" required />
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="errorMessages" class="error"></div>
+                <button type="submit" class="btn">Submit</button>
             </form>
-
-            <button type="submit" onclick="window.location.href='payment_history.php'" class="btn">Submit</button>
         </div>
     </div>
+
+    <script>
+        document.getElementById("paymentForm").addEventListener("submit", function (event) {
+            var errorMessages = document.getElementById("errorMessages");
+            errorMessages.innerHTML = ""; // Clear previous errors
+
+            var cardNumber = document.getElementById("cardNumber").value;
+            var cvv = document.getElementById("cvv").value;
+
+            if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+                event.preventDefault();
+                errorMessages.innerHTML += "<p>Please enter a valid 16-digit credit card number.</p>";
+            }
+
+            if (cvv.length !== 3 || isNaN(cvv)) {
+                event.preventDefault();
+                errorMessages.innerHTML += "<p>Please enter a valid 3-digit CVV.</p>";
+            }
+        });
+    </script>
 </body>
 
 </html>

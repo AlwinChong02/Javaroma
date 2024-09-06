@@ -57,9 +57,6 @@
                     $email = $_POST['email'] ?? '';
                     $password = $_POST['password'] ?? '';
 
-                    //hash password
-                    // $password = password_hash($password, PASSWORD_ARGON2ID);
-                    // echo "Hashed input password: " . $password . "<br>";
 
                     // Prepare SQL statement
                     $sql = $conn->prepare("SELECT password FROM users WHERE email = ?");
@@ -75,17 +72,14 @@
 
                         // Verify password
                         if ($hashedPassword === md5($password)) {
+
                             echo "Login successful";
                             session_start();
-                            $_SESSION["userID"] = $row['userID'];
-                            $_SESSION["username"] = $row['username'];
+
                             $_SESSION["email"] = $email;
                             $_SESSION["password"] = $password;
 
 
-                            // Do not store passwords in sessions or cookies in plain text
-                            setcookie('userID', $row['userID'], time() + 86400, "/", "localhost", true);
-                            setcookie('username', $row['username'], time() + 86400, "/", "localhost", true);
                             setcookie("email", $email, time() + 86400, "/", "localhost", true);
                             setcookie("password", $password, time() + 86400, "/", "localhost", true);
                             header("Location: ../index.php");

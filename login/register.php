@@ -72,8 +72,7 @@
                             //display pop up dialog
                             echo "<script>alert('Registration successful')</script>";
 
-                            //back to login page
-                            echo "<a href='login.php'>Login</a>";
+
                         } else {
                             echo "Registration failed";
                         }
