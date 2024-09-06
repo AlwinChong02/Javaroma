@@ -118,6 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ?>
                 <tr>
                     <td><?php echo $item['name']; ?></td>
+                    <td><select name="State" placeholder="State" required="required">
+                        <option value="" disable selected hidden>Hot/Cold</option>
+                        <option value="Hot">Hot</option>
+                        <option value="Cold">Cold</option>
+                    </select></td>
                     <td><?php echo $item['quantity']; ?></td>
                     <td><?php echo $item['price']; ?></td>
                     <td><?php echo $itemTotal; ?></td>
