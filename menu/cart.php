@@ -294,7 +294,7 @@ if (isset($_POST['checkout'])) {
                 <button id="fff" type="submit" name="checkout">Proceed to Checkout</button>
             </form>
 
-            <button id="fff" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
+            <button i="fff" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
         <h2>Your cart is empty.</h2>
