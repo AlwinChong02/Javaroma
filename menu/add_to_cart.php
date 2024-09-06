@@ -9,7 +9,7 @@ $price = $data['price'];
 
 // Create an item array
 $item = array(
-    'productName' => $productName,
+    'name' => $productName,
     'quantity' => $quantity,
     'price' => $price
 );
@@ -22,7 +22,7 @@ if (!isset($_SESSION['cart'])) {
 // Check if the product is already in the cart, update quantity if so
 $found = false;
 foreach ($_SESSION['cart'] as &$cartItem) {
-    if ($cartItem['productName'] == $productName) {
+    if ($cartItem['name'] == $productName) {
         $cartItem['quantity'] += $quantity;
         $found = true;
         break;

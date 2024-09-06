@@ -31,12 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Step 2: Insert into 'orderItems' table for each product in the cart
         foreach ($_SESSION['cart'] as $item) {
-            $productID = $item['productID']; // Assuming you have a product ID in your cart session
+            $productID = $item['id']; // Assuming you have a product ID in your cart session
             $quantity = $item['quantity'];
             $price = $item['price'];
             $temperature = isset($item['temperature']) ? $item['temperature'] : '';
 
-            $sqlProductID = "SELECT productID FROM product WHERE productName = ?";
             $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature) 
                               VALUES (?, ?, ?, ?, ?)";
             $stmtOrderItems = $conn->prepare($sqlOrderItems);
