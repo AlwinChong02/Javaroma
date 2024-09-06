@@ -315,7 +315,7 @@ $resultProducts = $conn->query($sqlProducts);
             border: 1px solid #ddd; 
             border-radius: 8px; 
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /
-            transition: box-shadow 0.3s ease;   
+            transition: box-shadow 0.3s ease;
         }
 
         /* Add a hover/focus effect to the input */
