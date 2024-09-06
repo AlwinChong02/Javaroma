@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 1200px;
+    height: 600px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.left {
+    flex: 1;
+    background-color: #fafafa;
+    border-radius: 15px 0 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.illustration img {
+    background-size: 100% auto;
+    max-width: 410px;
+    max-height: 459.13px;
+    object-fit: cover;
+    /* width: 100%;
+    height: 100%;
+    object-fit: scale-down; */
+}
+
+.right {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-box {
+    max-width: 400px;
+    margin-left: 40px;
+    margin-right: 40px;
+
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+p a {
+    color: #ff4a4a;
+    text-decoration: none;
+}
+
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-box label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.remember-me {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4a4a;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #e04343;
+}
+
+.social-login {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 10px;
+    margin: 0 5px;
+    font-size: 14px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.facebook {
+    background-color: #3b5998;
+}
+
+.apple {
+    background-color: #333;
+}
+
+.google {
+    background-color: #db4437;
+}
