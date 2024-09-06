@@ -13,7 +13,8 @@ $item = array(
     'id' => $productID,  // Add productID to the item
     'name' => $productName,
     'quantity' => $quantity,
-    'price' => $price
+    'price' => $price,
+    'temperature' => ''
 );
 
 // Check if the cart session exists, if not create it

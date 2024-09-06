@@ -14,7 +14,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Handle Proceed to Checkout action
+if (isset($_POST['checkout'])) {
     if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 
         // Step 1: Insert into the 'orders' table
@@ -30,11 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $orderID = $conn->insert_id;
 
         // Step 2: Insert into 'orderItems' table for each product in the cart
-        foreach ($_SESSION['cart'] as $item) {
-            $productID = $item['id']; // Using the productID in the session cart
+        foreach ($_SESSION['cart'] as &$item) {
+            // Set the selected temperature in the session for each item
+            $item['temperature'] = $_POST['temperature'][$item['id']] ?? '';  // Retrieve the temperature from the form
+
+            // Now save to the database
+            $productID = $item['id'];
             $quantity = $item['quantity'];
             $price = $item['price'];
-            $temperature = isset($item['temperature']) ? $item['temperature'] : '';
+            $temperature = $item['temperature'];  // Get the selected temperature
 
             $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature) 
                               VALUES (?, ?, ?, ?, ?)";
@@ -46,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Clear the cart session
         $_SESSION['cart'] = array();
 
-        // Redirect to success page
+        // Redirect to payment page
         header("Location: payment.php");
         exit();
     }
@@ -94,6 +99,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .cart-buttons button:hover {
             background-color: #002d66;
         }
+
+        /* Flexbox layout for buttons */
+        .cart-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .cart-actions form {
+            display: inline;
+        }
+
+        .quantity-input {
+            display: block;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -108,7 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Total</th>
-                <th>Action</th>
             </tr>
             <?php
             $totalPrice = 0;
@@ -118,40 +139,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ?>
                 <tr>
                     <td><?php echo $item['name']; ?></td>
-                    <td><select name="State" placeholder="State" required="required">
-                        <option value="" disable selected hidden>Hot/Cold</option>
-                        <option value="Hot">Hot</option>
-                        <option value="Cold">Cold</option>
-                    </select></td>
-                    <td><?php echo $item['quantity']; ?></td>
-                    <td><?php echo $item['price']; ?></td>
-                    <td><?php echo $itemTotal; ?></td>
                     <td>
-                        <!-- Update cart form -->
+                        <select name="temperature[<?php echo $item['id']; ?>]" required form="checkout-form">
+                            <option value="" disabled selected hidden>Hot/Cold</option>
+                            <option value="Hot" <?php if ($item['temperature'] == 'Hot') echo 'selected'; ?>>Hot</option>
+                            <option value="Cold" <?php if ($item['temperature'] == 'Cold') echo 'selected'; ?>>Cold</option>
+                        </select>
+                    </td>
+                    <td>
+                        <!-- Quantity input -->
                         <form action="update_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                            <input type="number" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
-                            <button type="submit">Update</button>
+                            <input type="number" class="quantity-input" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
+                        
+                            <div class="cart-actions">
+                                <!-- Update cart form -->
+                                <button type="submit">Update</button>
                         </form>
+
                         <!-- Remove from cart form -->
                         <form action="remove_from_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
+                            </div>
                     </td>
+                    <td>RM <?php echo $item['price']; ?></td>
+                    <td>RM <?php echo number_format($itemTotal, 2); ?></td>
                 </tr>
             <?php endforeach; ?>
             <tr>
                 <td colspan="3">Total Price</td>
-                <td colspan="2"><?php echo $totalPrice; ?></td>
+                <td colspan="2">RM <?php echo number_format($totalPrice, 2); ?></td>
             </tr>
         </table>
 
         <div class="cart-buttons">
-            <form action="cart.php" method="POST">
-                <button type="submit">Proceed to Checkout</button>
+            <!-- Separate form for checkout -->
+            <form action="cart.php" method="POST" id="checkout-form">
+                <button type="submit" name="checkout">Proceed to Checkout</button>
             </form>
-            <button onclick="window.location.href='index.php'">Continue Shopping</button>
+            <button type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
         <p>Your cart is empty.</p>
@@ -160,3 +188,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </body>
 
 </html>
+
