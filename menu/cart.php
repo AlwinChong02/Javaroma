@@ -218,6 +218,11 @@ if (isset($_POST['checkout'])) {
             font-size: 14px;
             width: 80px;
         }
+
+        #fff{
+            margin-top: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -284,12 +289,12 @@ if (isset($_POST['checkout'])) {
         </table>
 
         <div class="cart-buttons">
-            
+
             <form action="cart.php" method="POST" id="checkout-form">
-                <button type="submit" name="checkout">Proceed to Checkout</button>
+                <button id="fff" type="submit" name="checkout">Proceed to Checkout</button>
             </form>
 
-            <button type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
+            <button id="fff" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
         <h2>Your cart is empty.</h2>
