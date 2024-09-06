@@ -35,52 +35,52 @@
                 </form>
                 <script src='userValidation.js'></script>
                 <?php
-                    $servername = "localhost";
-                    $serverUsername = "root";
-                    $serverPassword = "";
-                    $dbname = "javaroma_db";
+                $servername = "localhost";
+                $serverUsername = "root";
+                $serverPassword = "";
+                $dbname = "javaroma_db";
 
-                    //check conncection
-                    $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
+                //check conncection
+                $conn = new mysqli($servername, $serverUsername, $serverPassword, $dbname);
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                } else {
+                    echo "Connected successfully<br>";
+                }
+
+                //get data from form 
+                if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+                    $name = $_POST['name'] ?? '';
+                    $email = $_POST['email'] ?? '';
+                    $password = $_POST['password'] ?? '';
+
+                    if (empty($name) || empty($email) || empty($password)) {
+                        echo "Please fill in all fields";
+                        exit();
+                    }
+
+                    //md5 password
+                    $password = md5($password);
+
+                    //prepare and bind 
+                    $sql = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+                    $sql->bind_param("sss", $name, $email, $password);
+                    $sql->execute();
+
+                    if ($sql->affected_rows > 0) {
+                        //display pop up dialog
+                        echo "<script>alert('Registration successful')</script>";
+
+
                     } else {
-                        echo "Connected successfully<br>";
+                        echo "Registration failed";
                     }
 
-                    //get data from form 
-                    if($_SERVER["REQUEST_METHOD"] === "POST") {
+                    $conn->close();
+                }
 
-                        $name = $_POST['name'] ?? '';
-                        $email = $_POST['email'] ?? '';
-                        $password = $_POST['password'] ?? '';
-
-                        if (empty($name) || empty($email) || empty($password)) {
-                            echo "Please fill in all fields";
-                            exit();
-                        }
-
-                        //md5 password
-                        $password = md5($password);
-
-                        //prepare and bind 
-                        $sql = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-                        $sql->bind_param("sss", $name, $email, $password);
-                        $sql->execute();
-
-                        if ($sql->affected_rows > 0) {
-                            //display pop up dialog
-                            echo "<script>alert('Registration successful')</script>";
-
-
-                        } else {
-                            echo "Registration failed";
-                        }
-
-                        $conn->close();
-                    }
-
-    ?>
+                ?>
 
             </div>
         </div>

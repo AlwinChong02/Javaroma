@@ -18,14 +18,32 @@ if ($conn->connect_error) {
 if (isset($_POST['checkout'])) {
     if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 
+        // Calculate total price of the order
+        $totalPrice = 0;
+        foreach ($_SESSION['cart'] as &$item) {
+            $itemTotal = $item['quantity'] * $item['price'];
+            $totalPrice += $itemTotal;
+        }
+
         // Step 1: Insert into the 'orders' table
         $userID = 1; // Replace with actual user ID if available
         $orderDate = date('Y-m-d H:i:s');
 
-        $sqlOrder = "INSERT INTO orders (userID, orderDate) VALUES (?, ?)";
+        // Modify the INSERT statement to include totalAmount
+        $sqlOrder = "INSERT INTO orders (userID, orderDate, totalAmount) VALUES (?, ?, ?)";
         $stmtOrder = $conn->prepare($sqlOrder);
-        $stmtOrder->bind_param("is", $userID, $orderDate);
+
+        if (!$stmtOrder) {
+            die("Order preparation failed: " . $conn->error);
+        }
+
+        // Adjust the parameter types and values
+        $stmtOrder->bind_param("isd", $userID, $orderDate, $totalPrice);
         $stmtOrder->execute();
+
+        if ($stmtOrder->affected_rows <= 0) {
+            die("Failed to insert order: " . $stmtOrder->error);
+        }
 
         // Get the last inserted orderID
         $orderID = $conn->insert_id;
@@ -44,8 +62,17 @@ if (isset($_POST['checkout'])) {
             $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature) 
                               VALUES (?, ?, ?, ?, ?)";
             $stmtOrderItems = $conn->prepare($sqlOrderItems);
+
+            if (!$stmtOrderItems) {
+                die("OrderItems preparation failed: " . $conn->error);
+            }
+
             $stmtOrderItems->bind_param("iiids", $orderID, $productID, $quantity, $price, $temperature);
             $stmtOrderItems->execute();
+
+            if ($stmtOrderItems->affected_rows <= 0) {
+                die("Failed to insert order item: " . $stmtOrderItems->error);
+            }
         }
 
         // Clear the cart session
@@ -57,6 +84,7 @@ if (isset($_POST['checkout'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
