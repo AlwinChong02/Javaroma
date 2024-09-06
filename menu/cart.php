@@ -147,6 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <table class="cart-table">
             <tr>
                 <th>Product Name</th>
+                <th>Temperature</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
@@ -160,15 +161,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ?>
             <tr>
                 <td><?php echo $item['name']; ?></td>
+                <td><select name="State" placeholder="State" required="required">
+                        <option value="" disable selected hidden>Hot/Cold</option>
+                        <option value="Hot">Hot</option>
+                        <option value="Cold">Cold</option>
+                    </select></td>
                 <td><?php echo $item['price']; ?></td>
-                <td><?php echo $itemTotal; ?></td>
                 <td>
                     <!-- Quantity input for update -->
                     <form action="update_cart.php" method="POST" class="inline-form">
                         <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                         <input type="number" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1" style="width: 60px;">
                 </td>
-                
+                <td><?php echo $itemTotal; ?></td>
                 <td>
                     <!-- Actions for update and remove -->
                     <div class="cart-actions">
