@@ -50,7 +50,7 @@ $orderResult = $stmtOrder->get_result();
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
+            background-color: antiquewhite;
             color: #333;
             line-height: 1.6;
         }

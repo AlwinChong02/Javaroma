@@ -51,7 +51,7 @@ if (isset($_POST['checkout'])) {
         // Get the last inserted orderID
         $orderID = $conn->insert_id;
 
-       
+
         // Step 2: Insert into 'orderItems' table for each product in the cart
         foreach ($_SESSION['cart'] as &$item) {
             // Set the selected temperature in the session for each item
@@ -104,7 +104,7 @@ if (isset($_POST['checkout'])) {
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: antiquewhite;
             margin: 0;
             padding: 20px;
         }
@@ -159,11 +159,6 @@ if (isset($_POST['checkout'])) {
             margin-bottom: 10px;
         }
 
-        /* Table row hover effect */
-        .cart-table tr:hover {
-            background-color: #f9f9f9;
-        }
-
         .cart-buttons {
             margin-top: 30px;
             text-align: center;
@@ -190,9 +185,34 @@ if (isset($_POST['checkout'])) {
             align-items: center;
         }
 
-        form {
+        #crudForm {
             margin: 0;
             padding: 0;
+            background-color: white;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        #crudForm1 {
+            padding: 0;
+            margin: 0;
+            width: auto;
+
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+            display: inline-block;
+            background-color: antiquewhite;
+        }
+
+        #checkout-btn {
+            padding: 10px 20px;
+            /* Adjust the button padding as needed */
+            width: auto;
+            /* Let the width of the button fit its content */
         }
 
 
@@ -216,17 +236,36 @@ if (isset($_POST['checkout'])) {
             border-radius: 4px;
             background-color: white;
             font-size: 14px;
-            width: 80px;
+            width: 150px;
         }
 
-        #fff{
-            margin-top: 30px;
+        #btn-cart {
+            padding: 15px 30px;
+            background-color: #353432;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
             text-align: center;
+        }
+
+        #btn-cart:hover {
+            background-color: #555;
         }
     </style>
 </head>
 
 <body>
+<div class="navigation">
+        <?php include('../includes/navigationList.php'); ?>
+    </div>
+    <br><br><br><br>
+
     <h2>Your Cart</h2>
 
     <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
@@ -245,7 +284,7 @@ if (isset($_POST['checkout'])) {
                 $totalPrice += $itemTotal;
 
                 $isFrappe = (isset($item['category']) && $item['category'] == 'Frappé');
-                ?>
+            ?>
                 <tr>
                     <td><?php echo $item['name']; ?></td>
                     <td>
@@ -253,7 +292,7 @@ if (isset($_POST['checkout'])) {
                             <option value="" disabled selected hidden>Hot/Cold</option>
                             <option value="Hot" <?php if ($item['temperature'] == 'Hot') echo 'selected'; ?> <?php if ($isFrappe) echo 'disabled'; ?>>Hot</option>
                             <option value="Cold" <?php if ($item['temperature'] == 'Cold' || $isFrappe)
-                                echo 'selected'; ?>>Cold</option>
+                                                        echo 'selected'; ?>>Cold</option>
                         </select>
                         <?php if ($isFrappe): ?>
                             <p style="color:red;">Frappe drinks are only available cold.</p>
@@ -261,7 +300,7 @@ if (isset($_POST['checkout'])) {
                     </td>
                     <td>
                         <!-- Quantity input -->
-                        <form action="update_cart.php" method="POST">
+                        <form id="crudForm" action="update_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <input type="number" class="quantity-input" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
 
@@ -271,7 +310,7 @@ if (isset($_POST['checkout'])) {
                         </form>
 
                         <!-- Remove from cart form -->
-                        <form action="remove_from_cart.php" method="POST">
+                        <form id="crudForm" action="remove_from_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
@@ -283,24 +322,27 @@ if (isset($_POST['checkout'])) {
                 </tr>
             <?php endforeach; ?>
             <tr>
-                <td colspan="3">Total Price</td>
-                <td colspan="2">RM <?php echo number_format($totalPrice, 2); ?></td>
+                <td colspan="3"></td>
+                <td colspan="1">Total Price: </td>
+                <td colspan="1">RM <?php echo number_format($totalPrice, 2); ?></td>
             </tr>
         </table>
 
         <div class="cart-buttons">
 
-            <form action="cart.php" method="POST" id="checkout-form">
-                <button id="fff" type="submit" name="checkout">Proceed to Checkout</button>
-            </form>
+            <button id="continue-btn" class="btn-cart" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
 
-            <button i="fff" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
+            <form id="crudForm1" action="cart.php" method="POST" id="checkout-form">
+                <button id="checkout-btn" class="btn-cart" type="submit" name="checkout">Proceed to Checkout</button>
+            </form>
         </div>
     <?php else: ?>
         <h2>Your cart is empty.</h2>
         <div class="cart-buttons">
-        <button onclick="window.location.href='index.php'">Continue Shopping</button></div>
+            <button onclick="window.location.href='index.php'">Continue Shopping</button>
+        </div>
     <?php endif; ?>
+    
 </body>
-
+<?php include('../includes/footerPolicy.php'); ?>
 </html>
