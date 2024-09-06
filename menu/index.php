@@ -96,20 +96,9 @@ $resultProducts = $conn->query($sqlProducts);
         #drinks-title {
             font-size: 36px;
             color: #004080;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             text-align: left;
             margin-top: 0;
-        }
-
-        #searchInput {
-            display: block;
-            width: 200px;
-            margin-bottom: 30px;
-            padding: 10px 15px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .product-gallery {
@@ -312,6 +301,30 @@ $resultProducts = $conn->query($sqlProducts);
         .modal-cart button:hover {
             background-color: #002d66;
         }
+
+        .search-container {
+            margin-bottom: 30px; 
+        }
+
+        /* Search Input */
+        #searchInput {
+            width: 100%;
+            max-width: 500px; 
+            padding: 15px 20px; 
+            font-size: 16px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /
+            transition: box-shadow 0.3s ease;   
+        }
+
+        /* Add a hover/focus effect to the input */
+        #searchInput:focus {
+            outline: none; /* Remove default outline */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add stronger shadow on focus */
+            border-color: #004080; /* Change border color to match theme */
+        }
+
     </style>
 </head>
 
@@ -344,9 +357,11 @@ $resultProducts = $conn->query($sqlProducts);
             <h2 id="drinks-title">Drinks</h2>
 
             <!-- Search Bar -->
-            <form id="searchForm" onsubmit="return false;">
-                <input type="text" id="searchInput" placeholder="Search drinks..." onkeyup="searchProducts()" style="width: 600px; padding: 15px;">
-            </form>
+            <div class="search-container">
+                <form id="searchForm" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search drinks..." onkeyup="searchProducts()">
+                </form>
+            </div>
 
             <!-- Product Gallery -->
             <div id="productGallery" class="product-gallery">
