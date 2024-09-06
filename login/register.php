@@ -50,16 +50,23 @@
 
     //get data from form 
     if($_SERVER["REQUEST_METHOD"] === "POST") {
+        // session_destroy();
+
         $name = $_POST['name'] ?? '';
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        //hash password
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        if (empty($name) || empty($email) || empty($password)) {
+            echo "Please fill in all fields";
+            exit();
+        }
+
+        //md5 password
+        $password = md5($password);
 
         //prepare and bind 
         $sql = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        $sql->bind_param("sss", $name, $email, $hashedPassword);
+        $sql->bind_param("sss", $name, $email, $password);
         $sql->execute();
 
         if ($sql->affected_rows > 0) {

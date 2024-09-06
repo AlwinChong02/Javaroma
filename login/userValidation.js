@@ -18,17 +18,12 @@ function validateForm() {
 }
 
 function validateEmail(email) {
-    const re = /\S+@\S+\.\S+/;
+    var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
 function validatePassword(password) {
-    if (password.length > 8 &&
-        password.match(/[a-z]/) &&
-        password.match(/[A-Z]/) &&
-        password.match(/[0-9]/) &&
-        password.match(/[!@#$%^&*()_\[\]{}?]/))   // special characters like ! @ # $ % ^ & * ( ) _ [ ] { } ?
-            return true;
-    return false;
-
+    return password.length >= 8;
 }
+
+
