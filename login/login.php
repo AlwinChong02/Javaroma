@@ -59,7 +59,7 @@
 
 
                     // Prepare SQL statement
-                    $sql = $conn->prepare("SELECT password FROM users WHERE email = ?");
+                    $sql = $conn->prepare("SELECT * FROM users WHERE email = ?");
                     $sql->bind_param("s", $email);
                     $sql->execute();
 
@@ -76,12 +76,16 @@
                             echo "Login successful";
                             session_start();
 
+                            $_SESSION["userID"] = $row['userID']; 
+                            $_SESSION["username"] = $row['username'];
                             $_SESSION["email"] = $email;
                             $_SESSION["password"] = $password;
 
-
+                            // Set cookies
+                            setcookie("userID", $row['userID'], time() + 86400, "/", "localhost", true);
+                            setcookie("username", $row['username'], time() + 86400, "/", "localhost", true);
                             setcookie("email", $email, time() + 86400, "/", "localhost", true);
-                            setcookie("password", $password, time() + 86400, "/", "localhost", true);
+                            setcookie("password", $hashedPassword, time() + 86400, "/", "localhost", true);
                             header("Location: ../index.php");
                             exit();
                         } else {
