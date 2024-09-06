@@ -280,10 +280,11 @@ if (isset($_POST['checkout'])) {
         </table>
 
         <div class="cart-buttons">
-            <!-- Separate form for checkout -->
+            
             <form action="cart.php" method="POST" id="checkout-form">
                 <button type="submit" name="checkout">Proceed to Checkout</button>
             </form>
+
             <button type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
