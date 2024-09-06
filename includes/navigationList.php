@@ -14,7 +14,7 @@
             <!-- Dropdown List -->
             <div class="profile-dropdown">
                 <a href="/Javaroma/profile">Profile</a>
-                <a href="/Javaroma/login/login.php">Login</a>
+                <a href="/Javaroma/account/login.php">Login</a>
                 <a href="/Javaroma/logout">Logout</a>
             </div>
         </div>
