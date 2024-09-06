@@ -39,7 +39,7 @@ $resultProducts = $conn->query($sqlProducts);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../WebStyle/mystyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Menu Page</title>
+    <title>Content Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -372,8 +372,7 @@ $resultProducts = $conn->query($sqlProducts);
             </div>
             <div class="modal-quantity">
                 <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1"
-                    style="width: 60px; text-align: center;">
+                <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 60px; text-align: center;">
             </div>
             <div class="modal-cart">
                 <button onclick="addToCart()">Add to Cart</button>
@@ -386,7 +385,6 @@ $resultProducts = $conn->query($sqlProducts);
             const quantity = document.getElementById('quantity').value;
             const productName = document.getElementById('modalTitle').innerText;
             const price = document.getElementById('modalPrice').innerText;
-            const productID = document.getElementById('modalTitle').getAttribute('data-product-id');
 
             fetch('add_to_cart.php', {
                     method: 'POST',
@@ -394,7 +392,6 @@ $resultProducts = $conn->query($sqlProducts);
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        productID: productID,
                         productName: productName,
                         quantity: quantity,
                         price: price
@@ -415,7 +412,7 @@ $resultProducts = $conn->query($sqlProducts);
             // Fill ingredients list
             let ingredientsArray = ingredients.split(',');
             let ingredientsList = document.getElementById("modalIngredients");
-            ingredientsList.innerHTML = '';  // Clear previous content
+            ingredientsList.innerHTML = ''; // Clear previous content
             ingredientsArray.forEach(function(ingredient) {
                 let li = document.createElement("li");
                 li.innerText = ingredient;
