@@ -1,43 +1,43 @@
 .footer-container {
-  
+
   padding: 20px;
 }
 
-.footer-background{
+.footer-background {
   background-color: #eaaf81;
   position: absolute;
   top: 1;
   left: 0;
   right: 0;
   bottom: 1;
-  
+
 }
 
 .footer-content {
   position: relative;
 }
 
-pre.copyRight{
+pre.copyRight {
   background-color: #eaaf81;
-float:left;
+  float: left;
 }
 
-.pre.introduction{
+.pre.introduction {
   text-align: justify;
 }
 
-.video-container{ 
- 
- height:500px;
- position: relative;
- display: flex;
- 
+.video-container {
+
+  height: 500px;
+  position: relative;
+  display: flex;
+
 }
 
-.videoSrc{
+.videoSrc {
   object-fit: cover;
   position: absolute;
-  transform: translate(37%,-87%);
+  transform: translate(37%, -87%);
 }
 
 #policy {
@@ -47,68 +47,81 @@ float:left;
   float: inline-end;
 }
 
-h3.links{
+h3.links {
   padding: 0;
-  margin: 0; 
+  margin: 0;
   text-align: right;
   margin-bottom: 5px;
   display: block;
-  height:50px;
-  
+  height: 50px;
+
 }
 
 /* Style for the ordered list with class "none" */
 ol.none {
-  list-style-type: none; /* Removes the default numbering */
-  padding: 0; /* Removes default padding */
-  margin: 0; /* Removes default margin */
-  
+  list-style-type: none;
+  /* Removes the default numbering */
+  padding: 0;
+  /* Removes default padding */
+  margin: 0;
+  /* Removes default margin */
+
 }
 
 /* Style for the list items */
 ol.none li {
   display: block;
-  line-height: 1.5; 
-  margin-bottom: 5px; /* Space between list items */
+  line-height: 1.5;
+  margin-bottom: 5px;
+  /* Space between list items */
 }
 
 /* Style for the links */
 ol.none li a {
   text-align: right;
   font-weight: bold;
-  text-decoration: none; /* Removes underline from links */
-  color: #007bff; /* Link color */
-  font-size: 16px; /* Font size for links */
+  text-decoration: none;
+  /* Removes underline from links */
+  color: #007bff;
+  /* Link color */
+  font-size: 16px;
+  /* Font size for links */
 }
 
 
 ol.none li a:hover {
-  color: #0056b3; /* Change color on hover */
+  color: #0056b3;
+  /* Change color on hover */
 }
 
-nav#topNavigation{
-  font-weight:bold;
+nav#topNavigation {
+  font-weight: bold;
   background-color: rgb(100, 69, 33)
 }
 
-#topNavigation ul{
+#topNavigation ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
   list-style-type: none;
-  
+
 }
 
-#topNavigation li{
+#topNavigation li {
   float: left;
 }
 
-#topNavigation a, a:link, a:visited, a:hover{
+#topNavigation a,
+a:link,
+a:visited,
+a:hover {
   color: rgb(211, 183, 129);
 }
 
-#topNavigation nav a, nav a:link, nav a:visited{
-  color:rgb(0,41,81);
+#topNavigation nav a,
+nav a:link,
+nav a:visited {
+  color: rgb(0, 41, 81);
   display: block;
   color: rgb(63, 58, 58);
   text-align: center;
@@ -127,40 +140,42 @@ nav#topNavigation{
 }
 
 
-.collaboration{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:50%;
+.collaboration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
   object-fit: cover;
   object-position: center;
-  z-index:-1;
-  
+  z-index: -1;
+
 }
 
-.socialMedia{
-  width:250px;
+.socialMedia {
+  width: 250px;
   height: 100px;
   display: flex;
   justify-content: center;
-  } 
-
-.icon{
-  display:flex;
-  gap: 10px;
-  align-items: center;  
 }
 
-.icon div{
-  max-width: 100px; /* Set a maximum width for the images */
-  height: auto; /* Maintain aspect ratio */;
+.icon {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon div {
+  max-width: 100px;
+  /* Set a maximum width for the images */
+  height: auto;
+  /* Maintain aspect ratio */
+  ;
   width: 50%;
 }
 
-.icon div img{
+.icon div img {
   max-width: 80%;
-  transform: translate(1700%,180%);
-  
-}
+  transform: translate(1700%, 180%);
 
+}

@@ -5,7 +5,8 @@
     <title>The Generics</title>
     <meta name="description" content="This is the description">
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" />
     <style>
         * {
             margin: 0;
@@ -156,7 +157,8 @@
                         </div>
                         <div class="input-box">
                             <span>Credit Card Number :</span>
-                            <input type="text" id="cardNumber" placeholder="1234 1234 1234 1234" pattern="\d{16}" required />
+                            <input type="text" id="cardNumber" placeholder="1234 1234 1234 1234" pattern="\d{16}"
+                                required />
                         </div>
                         <div class="input-box">
                             <span>Expiry date :</span>
