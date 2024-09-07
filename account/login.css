@@ -63,9 +63,14 @@ body {
 
 }
 
-h2 {
+h1 {
     margin-bottom: 20px;
     color: #333;
+
+}
+
+h2 {
+    font-family: 'Bree Serif', serif;
 }
 
 p {
@@ -141,6 +146,7 @@ p a {
 
 .facebook {
     background-color: #3b5998;
+
 }
 
 .apple {

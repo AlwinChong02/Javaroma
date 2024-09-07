@@ -13,7 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="steam-animation.js"></script>
-    <!-- -------------------------------- -->
     <style>
         svg {
             width: 300px;
@@ -35,7 +34,7 @@
             text-transform: uppercase;
         }
     </style>
-
+    <!-- -------------------------------- -->
 
 </head>
 
@@ -92,7 +91,7 @@
         </div>
         <div class="right">
             <div class="login-box">
-                <h2>Sign in</h2>
+                <h2>Sign In</h2>
                 <p>Don't have an account? <a href="register.php">Register here!</a></p>
                 <form id="login-form" action="index.php" method="post" onsubmit="validateForm()">
                     <div class=" input-box">
@@ -103,11 +102,12 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="Enter your Password">
                     </div>
-                    <div class="remember-me">
+                    <!-- <div class="remember-me">
                         <input type="checkbox" id="remember">
                         <label for="remember">Remember me</label>
                         <a href="#">Forgot Password?</a>
-                    </div>
+                    </div> -->
+                    <br>
                     <button type="submit" class="login-btn">Login</button>
                 </form>
 
