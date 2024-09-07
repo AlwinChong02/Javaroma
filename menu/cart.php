@@ -344,5 +344,5 @@ if (isset($_POST['checkout'])) {
     <?php endif; ?>
     
 </body>
-<?php include('../includes/footerPolicy.php'); ?>
+
 </html>
