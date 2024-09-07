@@ -495,9 +495,9 @@ if (isset($_POST['checkout'])) {
                     <label for="AMEX" class="amexMethod">
                         <div class="imgName">
                             <div class="imgContainer AMEX">
-                                <img src="https://i.ibb.co/wQnrX86/American-Express.jpg" alt="">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Touch_%27n_Go_eWallet_logo.svg" alt="">
                             </div>
-                            <span class="name">AMEX</span>
+                            <span class="name">TNG Ewallet</span>
                         </div>
                         <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
                     </label>
