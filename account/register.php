@@ -145,7 +145,7 @@
 
 
                     } else {
-                        echo "Registration failed";
+                        echo "<script>alert('Registration failed. Please try again.')</script>";
                     }
 
                     $conn->close();
