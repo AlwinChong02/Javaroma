@@ -529,7 +529,6 @@ section {
 /* --terms & conditions-- */
 
 #termsandconditions .topic h1 {
-  position: absolute;
   top: 17%;
   left: 35%;
   font-size: 5rem;
@@ -543,10 +542,15 @@ section {
   text-align: justify;
 }
 
+#termsandconditions2 {
+  display: block;
+  position: relative;
+}
+
 #termsandconditions2 .introduction {
   max-width: 50%;
-  position: absolute;
-  top: 3%;
+  margin: auto;
+  padding: 20px;
   font-size: 2rem;
   text-align: justify;
 }

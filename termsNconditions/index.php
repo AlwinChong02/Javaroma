@@ -52,9 +52,9 @@
                 At the time of checkout, shipping costs and available delivery methods will be prominently shown. You
                 are liable for any taxes, customs fees, or other levies your local government may apply.</p><br>
 
-    </section>
-    <section id="termsandconditions2">
-        <div class="introduction">
+    
+    <!-- <section id="termsandconditions2"> -->
+        <!-- <div class="introduction"> -->
             <p>7.<span class="style">Returns and Compensation </span>Within 14 days of receiving your item, please get
                 in touch with us to arrange a refund or exchange if you're not happy with your purchase.
                 The product needs to be unused and in its original packing in order to be returned.
@@ -84,7 +84,7 @@
                 "Arbitrator"). In the event that the parties cannot agree upon an arbitrator,
                 the AIAC President will choose the arbitrator in line with the Rules.</p><br>
 
-            <p>12.<span class="style">Terms & Conditions apply.</span> These Terms & Conditions are subject to change at
+            <p style="width: 772px;">12.<span class="style">Terms & Conditions apply.</span> These Terms & Conditions are subject to change at
                 any time by JavaRoma. Any modifications will be announced on our website,
                 and by using our services after they are posted, you agree to the updated terms.</p><br>
 
@@ -95,7 +95,8 @@
             <p><span class="style">JavaRoma Customer support Team</span></p>
 
 
-        </div>
+        <!-- </div> -->
+    <!-- </section> -->
     </section>
 </body>
 
