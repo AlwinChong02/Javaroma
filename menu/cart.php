@@ -106,7 +106,7 @@ if (isset($_POST['checkout'])) {
             font-family: 'Arial', sans-serif;
             background-color: antiquewhite;
             margin: 0;
-            padding: 20px;
+            padding: 5px;
         }
 
         h2 {
@@ -344,5 +344,5 @@ if (isset($_POST['checkout'])) {
     <?php endif; ?>
     
 </body>
-
+<?php include('../includes/footerPolicy.php'); ?>
 </html>
