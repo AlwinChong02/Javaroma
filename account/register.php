@@ -126,7 +126,7 @@
                     $password = $_POST['password'] ?? '';
 
                     if (empty($name) || empty($email) || empty($password)) {
-                        echo "Please fill in all fields";
+                        echo "<script>alert('Please fill in all fields.')</script>";
                         exit();
                     }
 
