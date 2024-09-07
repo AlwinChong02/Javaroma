@@ -102,11 +102,6 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="Enter your Password">
                     </div>
-                    <!-- <div class="remember-me">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">Remember me</label>
-                        <a href="#">Forgot Password?</a>
-                    </div> -->
                     <br>
                     <button type="submit" class="login-btn">Login</button>
                 </form>
@@ -141,7 +136,6 @@
                     if ($result->num_rows > 0) {
                         $row = $result->fetch_assoc();
                         $hashedPassword = $row['password'];
-                        // echo "Hashed password: " . $hashedPassword . "<br>";
                 
                         // Verify password
                         if ($hashedPassword === md5($password)) {
@@ -165,9 +159,7 @@
                             echo "Login failed: Invalid password";
 
                         }
-                    } else {
-                        echo "Login failed: User not found";
-                    }
+                    } 
                 }
 
                 $conn->close();
@@ -175,9 +167,20 @@
 
                 <p>or continue with</p>
                 <div class="social-login">
-                    <button class="social-btn facebook">Facebook</button>
-                    <button class="social-btn apple">Apple</button>
-                    <button class="social-btn google">Google</button>
+                    <button class="social-btn facebook" onclick="notAvailable()"  >
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/facebook-f.png" alt="facebook-f"/>
+                    </button>
+                    <button class="social-btn apple" onclick="notAvailable()">
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/mac-os.png" alt="mac-os"/>
+                </button>
+                    <button class="social-btn google" onclick="notAvailable()">
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/google-plus.png" alt="google-plus"/>
+                    </button>
+                    <script>
+                        function notAvailable() {
+                            alert("This login is not available at this moment. Please try again later.");
+                        }
+                    </script>
                 </div>
             </div>
         </div>

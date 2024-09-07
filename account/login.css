@@ -142,17 +142,22 @@ p a {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    justify-content: center;
 }
 
 .facebook {
     background-color: #3b5998;
 
+
 }
 
 .apple {
     background-color: #333;
+    src: url(icon/apple.svg);
 }
 
 .google {
     background-color: #db4437;
+    src: url(icon/google.svg);
 }
