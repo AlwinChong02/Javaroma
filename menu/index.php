@@ -505,6 +505,7 @@ $resultProducts = $conn->query($sqlProducts);
 
         </script>
     </div>
+    <?php include('../includes/footerPolicy.php'); ?>
 </body>
 
 </html>

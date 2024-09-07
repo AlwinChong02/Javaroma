@@ -53,6 +53,7 @@
                 are liable for any taxes, customs fees, or other levies your local government may apply.</p><br>
 
     
+                <p>----------------------------------------------------------------------</p><br>
     <!-- <section id="termsandconditions2"> -->
         <!-- <div class="introduction"> -->
             <p>7.<span class="style">Returns and Compensation </span>Within 14 days of receiving your item, please get
