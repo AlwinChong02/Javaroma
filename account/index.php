@@ -132,7 +132,7 @@
                     $sql->execute();
 
                     $result = $sql->get_result();
-                    echo "Number of rows: " . $result->num_rows . "<br>";
+
                     if ($result->num_rows > 0) {
                         $row = $result->fetch_assoc();
                         $hashedPassword = $row['password'];
