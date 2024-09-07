@@ -23,7 +23,7 @@ function validateEmail(email) {
 }
 
 function validatePassword(password) {
-  // Password must be >=8 and have least one upper, lowercase , one number and one special character
+  // Password must be >=8 and have least one upper, lowercase and one number
   return (
     password.length >= 8 &&
     /[a-z]/.test(password) &&

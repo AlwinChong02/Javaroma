@@ -24,7 +24,7 @@ body {
 
 .left {
     flex: 1;
-    background-color: #fafafa;
+    background-color: #C2B59B;
     border-radius: 15px 0 0 15px;
     display: flex;
     flex-direction: column;
@@ -63,9 +63,14 @@ body {
 
 }
 
-h2 {
+h1 {
     margin-bottom: 20px;
     color: #333;
+
+}
+
+h2 {
+    font-family: 'Bree Serif', serif;
 }
 
 p {
@@ -137,16 +142,22 @@ p a {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    justify-content: center;
 }
 
 .facebook {
     background-color: #3b5998;
+
+
 }
 
 .apple {
     background-color: #333;
+    src: url(icon/apple.svg);
 }
 
 .google {
     background-color: #db4437;
+    src: url(icon/google.svg);
 }

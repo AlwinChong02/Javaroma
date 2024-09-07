@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <title>User Profile</title>
     <link rel='stylesheet' type='text/css' media='screen' href='../WebStyle/mystyle.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet' type='text/css' media='screen' href='profile.css'>
     <style>
         h1{
@@ -14,7 +15,7 @@
 <body>
     <?php include('../includes/navigationList.php'); ?>
     <h1>User Profile</h1>
-    <!-- below will not using mystyle.css, instead, it use profile.css -->
+    <!-- mystlye.css with profile.css -->
     <form id='form-profile' action='profile.php' method='post' onsubmit='return validateForm()'>
         
         <div>
@@ -72,7 +73,7 @@
                     setcookie('username', $name, time() + (86400 * 30), "/");
                     setcookie('email', $email, time() + (86400 * 30), "/");
                     setcookie('password', $newPassword, time() + (86400 * 30), "/");
-                    
+
                     echo "<script>alert('Your user information has been updated');</script>";
                 }
 

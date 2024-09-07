@@ -21,6 +21,5 @@
                 <a href="/Javaroma/account/logout.php">Logout</a>
             </div>
         </div>
-        <!-- <a href="/Javaroma/login/login.php" class="logo"><img src='/Javaroma/images/profile_icon.jpg' style="max-width: 18px;"/></a> -->
     </nav>
 </header>
