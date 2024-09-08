@@ -22,7 +22,7 @@ if (isset($_SESSION['userID'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $ratings = mysqli_real_escape_string($conn, $_POST['ratings']);
-    $date = date('Y-m-d'); // Automatically sets today's date
+    $date = date('Y-m-d');
 
     // Insert query
     $sql = "INSERT INTO feedback (userID, description, ratings, date) VALUES ('$userID', '$description', '$ratings', '$date')";
