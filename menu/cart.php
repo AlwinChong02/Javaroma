@@ -364,11 +364,8 @@ if (isset($_POST['checkout'])) {
 </head>
 
 <body>
-    <div class="navigation">
         <?php include('../includes/navigationList.php'); ?>
-    </div>
-    <br><br><br><br>
-
+    <div class="bottomup" Style="margin-top:150px">
     <h2>Your Cart</h2>
 
     <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
@@ -501,7 +498,7 @@ if (isset($_POST['checkout'])) {
             </form>
         </div>
     </div>
-
+    </div>  
     <script>
         // Show Payment Modal
         document.getElementById("checkout-btn").addEventListener("click", function() {
@@ -514,8 +511,10 @@ if (isset($_POST['checkout'])) {
             }
         }
     </script>
-
+<div class="spacing" style="margin-top: 400px">
     <?php include('../includes/footerPolicy.php'); ?>
+    </div>
+    
 </body>
 
 </html>
