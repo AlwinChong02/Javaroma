@@ -10,7 +10,7 @@
         <a href="/Javaroma/founderNaboutus">About Us</a>
         <a href="/Javaroma/menu/cart.php"><img src='/Javaroma/images/cart_icon.webp' style="max-width: 30px;"></a>
         <div class="profile-container">
-            <a href="/Javaroma/login/login.php" class="logo profile-icon">
+            <a href="#" class="logo profile-icon">
                 <img src='/Javaroma/images/profile_icon.jpg' alt="Profile Icon" style="max-width: 18px;" />
             </a>
             <!-- Dropdown List -->
