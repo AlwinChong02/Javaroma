@@ -54,15 +54,13 @@ if (isset($_POST['checkout'])) {
 
         // Step 2: Insert into 'orderItems' table for each product in the cart
         foreach ($_SESSION['cart'] as &$item) {
-            // Set the selected temperature in the session for each item
             $item['temperature'] = $_POST['temperature'][$item['id']] ?? '';  // Retrieve the temperature from the form
 
-            // Now save to the database
             $productID = $item['id'];
             $category = $item['category'];
             $quantity = $item['quantity'];
             $price = $item['price'];
-            $temperature = $item['temperature'];  // Get the selected temperature
+            $temperature = $item['temperature']; 
 
             $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature) 
                               VALUES (?, ?, ?, ?, ?)";
@@ -210,9 +208,7 @@ if (isset($_POST['checkout'])) {
 
         #checkout-btn {
             padding: 10px 20px;
-            /* Adjust the button padding as needed */
             width: auto;
-            /* Let the width of the button fit its content */
         }
 
 
@@ -222,14 +218,12 @@ if (isset($_POST['checkout'])) {
             text-align: center;
         }
 
-        /* Total Price row */
         .cart-table tr:last-child {
             font-weight: bold;
             background-color: #f2f2f2;
             color: #353432;
         }
 
-        /* Select box styling */
         select {
             padding: 5px;
             border: 1px solid #ddd;
@@ -414,7 +408,6 @@ if (isset($_POST['checkout'])) {
                             <input type="number" class="quantity-input" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
 
                             <div class="cart-actions">
-                                <!-- Update cart form -->
                                 <button type="submit">Update</button>
                         </form>
 
@@ -515,7 +508,6 @@ if (isset($_POST['checkout'])) {
             document.getElementById("paymentModal").style.display = "flex";
         });
 
-        // Close Payment Modal
         window.onclick = function(event) {
             if (event.target == document.getElementById("paymentModal")) {
                 document.getElementById("paymentModal").style.display = "none";
