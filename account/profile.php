@@ -14,7 +14,7 @@
 </head>
 <body>
     <?php include('../includes/navigationList.php'); ?>
-    <h1>User Profile</h1>
+    <h1>Update User Profile</h1>
     <!-- mystlye.css with profile.css -->
     <form id='form-profile' action='profile.php' method='post' onsubmit='return validateForm()'>
         
@@ -52,10 +52,8 @@
                 $email = $_POST['email'] ?? '';
                 $newPassword = $_POST['password'] ?? '';
 
-                // check old password is different from new password, if is different, then encrypt the password
-                if (md5($newPassword) != $_COOKIE['password']) {
-                    $newPassword = md5($newPassword);
-                }
+                $newPassword = md5($newPassword);
+
 
                 //get userID from cookie
                 $userID = $_COOKIE['userID'];
