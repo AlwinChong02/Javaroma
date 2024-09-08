@@ -37,8 +37,8 @@ if ($resultProducts->num_rows > 0) {
             echo '<img src="../images/cold.png" alt="Cold Icon">';
         }
 
-        echo '</div>'; // Close temperature-icons
-        echo '</div>'; // Close product-item
+        echo '</div>';
+        echo '</div>';
     }
 } else {
     echo "No products found.";
