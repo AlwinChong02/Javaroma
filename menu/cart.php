@@ -100,14 +100,13 @@ if (isset($_POST['checkout'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../WebStyle/mystyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" href="../images/Javaromalogo.png">
     <title>Cart</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: antiquewhite;
+            background-color: #f4f4f4;
             margin: 0;
-            padding: 5px;
+            padding: 20px;
         }
 
         h2 {
@@ -160,6 +159,11 @@ if (isset($_POST['checkout'])) {
             margin-bottom: 10px;
         }
 
+        /* Table row hover effect */
+        .cart-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
         .cart-buttons {
             margin-top: 30px;
             text-align: center;
@@ -186,34 +190,9 @@ if (isset($_POST['checkout'])) {
             align-items: center;
         }
 
-        #crudForm {
+        form {
             margin: 0;
             padding: 0;
-            background-color: white;
-            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.4;
-            color: #333;
-        }
-
-        #crudForm1 {
-            padding: 0;
-            margin: 0;
-            width: auto;
-
-            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-            display: inline-block;
-            background-color: antiquewhite;
-        }
-
-        #checkout-btn {
-            padding: 10px 20px;
-            /* Adjust the button padding as needed */
-            width: auto;
-            /* Let the width of the button fit its content */
         }
 
 
@@ -237,36 +216,17 @@ if (isset($_POST['checkout'])) {
             border-radius: 4px;
             background-color: white;
             font-size: 14px;
-            width: 150px;
+            width: 80px;
         }
 
-        #btn-cart {
-            padding: 15px 30px;
-            background-color: #353432;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            display: inline-block;
+        #fff {
+            margin-top: 30px;
             text-align: center;
-        }
-
-        #btn-cart:hover {
-            background-color: #555;
         }
     </style>
 </head>
 
 <body>
-    <div class="navigation">
-        <?php include('../includes/navigationList.php'); ?>
-    </div>
-    <br><br><br><br>
-
     <h2>Your Cart</h2>
 
     <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
@@ -304,7 +264,7 @@ if (isset($_POST['checkout'])) {
                     </td>
                     <td>
                         <!-- Quantity input -->
-                        <form id="crudForm" action="update_cart.php" method="POST">
+                        <form action="update_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <input type="number" class="quantity-input" name="new_quantity"
                                 value="<?php echo $item['quantity']; ?>" min="1">
@@ -315,7 +275,7 @@ if (isset($_POST['checkout'])) {
                         </form>
 
                         <!-- Remove from cart form -->
-                        <form id="crudForm" action="remove_from_cart.php" method="POST">
+                        <form action="remove_from_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
@@ -327,20 +287,18 @@ if (isset($_POST['checkout'])) {
                 </tr>
             <?php endforeach; ?>
             <tr>
-                <td colspan="3"></td>
-                <td colspan="1">Total Price: </td>
-                <td colspan="1">RM <?php echo number_format($totalPrice, 2); ?></td>
+                <td colspan="3">Total Price</td>
+                <td colspan="2">RM <?php echo number_format($totalPrice, 2); ?></td>
             </tr>
         </table>
 
         <div class="cart-buttons">
 
-            <button id="continue-btn" class="btn-cart" type="button" onclick="window.location.href='index.php'">Continue
-                Shopping</button>
-
-            <form id="crudForm1" action="cart.php" method="POST" id="checkout-form">
-                <button id="checkout-btn" class="btn-cart" type="submit" name="checkout">Proceed to Checkout</button>
+            <form action="cart.php" method="POST" id="checkout-form">
+                <button id="fff" type="submit" name="checkout">Proceed to Checkout</button>
             </form>
+
+            <button i="fff" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
         <h2>Your cart is empty.</h2>
@@ -348,8 +306,6 @@ if (isset($_POST['checkout'])) {
             <button onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php endif; ?>
-
 </body>
-<?php include('../includes/footerPolicy.php'); ?>
 
 </html>
