@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Re-index the session array after removing
     $_SESSION['cart'] = array_values($_SESSION['cart']);
 
     // Redirect back to cart page

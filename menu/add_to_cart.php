@@ -11,7 +11,7 @@ $price = $data['price'];
 
 // Create an item array
 $item = array(
-    'id' => $productID,  // Add productID to the item
+    'id' => $productID,
     'category' => $productCategory,
     'name' => $productName,
     'quantity' => $quantity,
@@ -35,9 +35,7 @@ foreach ($_SESSION['cart'] as &$cartItem) {
 }
 
 if (!$found) {
-    // If the product is not in the cart, add new item
     $_SESSION['cart'][] = $item;
 }
 
-// Send response back to the client
 echo json_encode(array('message' => 'Product added to cart successfully!'));
