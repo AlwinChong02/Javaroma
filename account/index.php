@@ -1,7 +1,6 @@
 <?php 
 session_start();
 
-// Move all PHP logic before any HTML output
 $servername = "localhost";
 $serverUsername = "root";
 $serverPassword = "";
