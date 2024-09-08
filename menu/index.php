@@ -110,7 +110,6 @@ $resultProducts = $conn->query($sqlProducts);
         .product-item {
             background-color: #FFF;
             padding: 25px;
-            /* Increase padding to make products larger */
             border-radius: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -118,17 +117,13 @@ $resultProducts = $conn->query($sqlProducts);
             justify-content: space-between;
             text-align: center;
             height: 100%;
-            /* Ensure all product items have the same height */
             cursor: pointer;
         }
 
         .product-item img {
             max-width: 180px;
-            /* Increase the size of the images */
             max-height: 230px;
-            /* Adjust the height accordingly */
             margin: 0 auto;
-            /* Center the images horizontally */
             display: block;
             border-radius: 10px;
         }
@@ -147,7 +142,6 @@ $resultProducts = $conn->query($sqlProducts);
             height: 1px;
             background-color: #ccc;
             margin-top: 50px;
-            /* Increase this value to add more space */
             position: absolute;
             bottom: -60px;
             left: 0;
@@ -158,7 +152,6 @@ $resultProducts = $conn->query($sqlProducts);
             display: flex;
             justify-content: center;
             gap: 10px;
-            /* Space between icons */
         }
 
         .temperature-icons img {
@@ -178,7 +171,6 @@ $resultProducts = $conn->query($sqlProducts);
             margin: 10px;
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -306,7 +298,6 @@ $resultProducts = $conn->query($sqlProducts);
             margin-bottom: 30px;
         }
 
-        /* Search Input */
         #searchInput {
             width: 100%;
             max-width: 500px;
@@ -317,14 +308,10 @@ $resultProducts = $conn->query($sqlProducts);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);/ transition: box-shadow 0.3s ease;
         }
 
-        /* Add a hover/focus effect to the input */
         #searchInput:focus {
             outline: none;
-            /* Remove default outline */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            /* Add stronger shadow on focus */
             border-color: #004080;
-            /* Change border color to match theme */
         }
     </style>
 </head>
@@ -464,7 +451,7 @@ $resultProducts = $conn->query($sqlProducts);
                 // Fill ingredients list
                 let ingredientsArray = ingredients.split(',');
                 let ingredientsList = document.getElementById("modalIngredients");
-                ingredientsList.innerHTML = ''; // Clear previous content
+                ingredientsList.innerHTML = '';
                 ingredientsArray.forEach(function (ingredient) {
                     let li = document.createElement("li");
                     li.innerText = ingredient;
@@ -473,7 +460,7 @@ $resultProducts = $conn->query($sqlProducts);
 
                 // Fill price
                 let priceList = document.getElementById("modalPrice");
-                priceList.innerHTML = ''; // Clear previous content
+                priceList.innerHTML = '';
                 let li = document.createElement("li");
                 li.innerText = price;
                 priceList.appendChild(li);
