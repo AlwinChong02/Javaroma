@@ -32,7 +32,7 @@
 
     <section id="reward2">
         <div class="rewardh2">
-            <h2> Reedem rewards</h2>
+            <h2> Redeem rewards</h2>
         </div>
         <div class="rewardOne">
             <img src="../images/reward2.png" width="500" height="200" class="javaromareward">
