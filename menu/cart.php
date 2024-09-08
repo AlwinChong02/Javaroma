@@ -106,7 +106,11 @@ if (isset($_POST['checkout'])) {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
+            margin-top:8%;
+        }
+
+        form{
+            background-color: none;
         }
 
         h2 {
@@ -219,11 +223,40 @@ if (isset($_POST['checkout'])) {
             width: 80px;
         }
 
-        #fff {
-            margin-top: 30px;
+       
+
+        #ddd{
+            margin-left: 300px;
+         
+            margin-bottom: 100px;
             text-align: center;
+           
         }
+
+        #checkout-form{
+            position: absolute;
+            left:0%; 
+            background-color: #f4f4f4;
+            box-shadow: 100px 100px 100px rgba(0,0,0,0);
+
+        }
+
+        #fff{
+            box-shadow: 100px 100px 100px rgba(0,0,0,0);
+            margin-top: 0px;
+            margin-left: 550px;
+            line-height:120%;
+        }
+
+        form.removebtn{
+           box-shadow: 0px 0px 0px rgba(0,0,0,0);
+        }
+
+        /* button .submit-btn{
+            background-color: white;
+        } */
     </style>
+    <?php include('../includes/navigationList.php'); ?>
 </head>
 
 <body>
@@ -271,11 +304,11 @@ if (isset($_POST['checkout'])) {
 
                             <div class="cart-actions">
                                 <!-- Update cart form -->
-                                <button type="submit">Update</button>
+                                <button type="submit" class="submit-btn">Update</button>
                         </form>
 
                         <!-- Remove from cart form -->
-                        <form action="remove_from_cart.php" method="POST">
+                        <form action="remove_from_cart.php" method="POST" class="removebtn">
                             <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
                             <button type="submit">Remove</button>
                         </form>
@@ -298,7 +331,7 @@ if (isset($_POST['checkout'])) {
                 <button id="fff" type="submit" name="checkout">Proceed to Checkout</button>
             </form>
 
-            <button i="fff" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
+            <button id="ddd" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
         </div>
     <?php else: ?>
         <h2>Your cart is empty.</h2>
@@ -307,5 +340,5 @@ if (isset($_POST['checkout'])) {
         </div>
     <?php endif; ?>
 </body>
-
+<?php include('../includes/footerPolicy.php'); ?>
 </html>
