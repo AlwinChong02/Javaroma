@@ -305,7 +305,8 @@ $resultProducts = $conn->query($sqlProducts);
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);/ transition: box-shadow 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
         }
 
         #searchInput:focus {
@@ -494,5 +495,6 @@ $resultProducts = $conn->query($sqlProducts);
     </div>
     <?php include('../includes/footerPolicy.php'); ?>
 </body>
+
 
 </html>
