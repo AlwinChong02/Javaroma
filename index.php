@@ -27,15 +27,15 @@
         <div class="slider-frame">
             <div class="slide-images">
                 <div class="img-container">
-                    <a href="#">
+                    <a href="menu/index.php">
                         <img src="images/JavaRomacoffee.png" alt="promotion1"></a>
                 </div>
                 <div class="img-container">
-                    <a href="#">
+                    <a href="menu/index.php">
                         <img src="images/Collaboration.png" alt="promotion2"></a>
                 </div>
                 <div class="img-container">
-                    <a href="#">
+                    <a href="menu/index.php">
                         <img src="images/getapps.png" alt="promotion3"></a>
                 </div>
             </div>
