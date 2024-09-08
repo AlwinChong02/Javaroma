@@ -58,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel='stylesheet' type='text/css' media='screen' href='../WebStyle/mystyle.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet' type='text/css' media='screen' href='profile.css'>
+    <link rel="icon" type="image/png" href="../images/Javaromalogo.png">
     <style>
         h1 {
             margin-top: 120px;
