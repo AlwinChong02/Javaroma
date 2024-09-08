@@ -60,9 +60,9 @@ if (isset($_POST['checkout'])) {
             $category = $item['category'];
             $quantity = $item['quantity'];
             $price = $item['price'];
-            $temperature = $item['temperature']; 
+            $temperature = $item['temperature'];
 
-            $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature) 
+            $sqlOrderItems = "INSERT INTO orderItems (orderID, productID, quantity, price, temperature)
                               VALUES (?, ?, ?, ?, ?)";
             $stmtOrderItems = $conn->prepare($sqlOrderItems);
 
@@ -351,15 +351,27 @@ if (isset($_POST['checkout'])) {
         .payment-modal button:hover {
             background-color: #555;
         }
+
         input[type="radio"] {
-    width: 16px;
-    height: 16px;
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.3s ease-in-out;
-}
+            opacity: 0;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        #checkout-form {
+            background-color: transparent;
+            padding: 0;
+            box-shadow: none;
+            max-width: 100%;
+            margin-top: 0;
+            text-align: left;
+            font-size: inherit;
+        }
     </style>
 </head>
 
@@ -369,83 +381,83 @@ if (isset($_POST['checkout'])) {
     <h2>Your Cart</h2>
 
     <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
-        <table class="cart-table">
-            <tr>
-                <th>Product Name</th>
-                <th>Temperature</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
-            <?php
-            $totalPrice = 0;
-            foreach ($_SESSION['cart'] as $key => $item):
-                $itemTotal = $item['quantity'] * $item['price'];
-                $totalPrice += $itemTotal;
-
-                $isFrappe = (isset($item['category']) && $item['category'] == 'Frappé');
-            ?>
+        <form id="checkout-form" action="cart.php" method="POST">
+            <table class="cart-table">
                 <tr>
-                    <td><?php echo $item['name']; ?></td>
-                    <td>
-                        <select name="temperature[<?php echo $item['id']; ?>]" required form="checkout-form">
-                            <option value="" disabled selected hidden>Hot/Cold</option>
-                            <option value="Hot" <?php if ($item['temperature'] == 'Hot') echo 'selected'; ?> <?php if ($isFrappe) echo 'disabled'; ?>>Hot</option>
-                            <option value="Cold" <?php if ($item['temperature'] == 'Cold' || $isFrappe)
-                                                        echo 'selected'; ?>>Cold</option>
-                        </select>
-                        <?php if ($isFrappe): ?>
-                            <p style="color:red;">Frappe drinks are only available cold.</p>
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <!-- Quantity input -->
-                        <form id="crudForm" action="update_cart.php" method="POST">
-                            <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                            <input type="number" class="quantity-input" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
-
-                            <div class="cart-actions">
-                                <button type="submit">Update</button>
-                        </form>
-
-                        <!-- Remove from cart form -->
-                        <form id="crudForm" action="remove_from_cart.php" method="POST">
-                            <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                            <button type="submit">Remove</button>
-                        </form>
-                        </div>
-                        </div>
-                    </td>
-                    <td>RM <?php echo $item['price']; ?></td>
-                    <td>RM <?php echo number_format($itemTotal, 2); ?></td>
+                    <th>Product Name</th>
+                    <th>Temperature</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
                 </tr>
-            <?php endforeach; ?>
-            <tr>
-                <td colspan="3"></td>
-                <td colspan="1">Total Price: </td>
-                <td colspan="1">RM <?php echo number_format($totalPrice, 2); ?></td>
-            </tr>
-        </table>
+                <?php
+                $totalPrice = 0;
+                foreach ($_SESSION['cart'] as $key => $item):
+                    $itemTotal = $item['quantity'] * $item['price'];
+                    $totalPrice += $itemTotal;
 
-        <div class="cart-buttons">
+                    $isFrappe = (isset($item['category']) && $item['category'] == 'Frappé');
+                ?>
+                    <tr>
+                        <td><?php echo $item['name']; ?></td>
+                        <td>
+                            <select name="temperature[<?php echo $item['id']; ?>]" required form="checkout-form">
+                                <option value="" disabled selected hidden>Hot/Cold</option>
+                                <option value="Hot" <?php if ($item['temperature'] == 'Hot') echo 'selected'; ?> <?php if ($isFrappe) echo 'disabled'; ?>>Hot</option>
+                                <option value="Cold" <?php if ($item['temperature'] == 'Cold' || $isFrappe)
+                                                            echo 'selected'; ?>>Cold</option>
+                            </select>
+                            <?php if ($isFrappe): ?>
+                                <p style="color:red;">Frappe drinks are only available cold.</p>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <!-- Quantity input -->
+                            <form id="crudForm" action="update_cart.php" method="POST">
+                                <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                                <input type="number" class="quantity-input" name="new_quantity" value="<?php echo $item['quantity']; ?>" min="1">
 
-            <button id="continue-btn" class="btn-cart" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
+                                <div class="cart-actions">
+                                    <button type="submit">Update</button>
+                            </form>
+
+                            <!-- Remove from cart form -->
+                            <form id="crudForm" action="remove_from_cart.php" method="POST">
+                                <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                                <button type="submit">Remove</button>
+                            </form>
+                            </div>
+                            </div>
+                        </td>
+                        <td>RM <?php echo $item['price']; ?></td>
+                        <td>RM <?php echo number_format($itemTotal, 2); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                <tr>
+                    <td colspan="3"></td>
+                    <td colspan="1">Total Price: </td>
+                    <td colspan="1">RM <?php echo number_format($totalPrice, 2); ?></td>
+                </tr>
+            </table>
+
+            <div class="cart-buttons">
+
+                <button id="continue-btn" class="btn-cart" type="button" onclick="window.location.href='index.php'">Continue Shopping</button>
 
 
-            <button id="checkout-btn" class="btn-cart" type="submit" name="checkout">Proceed to Checkout</button>
+                <button id="checkout-btn" class="btn-cart" type="button">Proceed to Checkout</button>
 
-        </div>
-    <?php else: ?>
-        <h2>Your cart is empty.</h2>
-        <div class="cart-buttons">
-            <button onclick="window.location.href='index.php'">Continue Shopping</button>
-        </div>
-    <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <h2>Your cart is empty.</h2>
+            <div class="cart-buttons">
+                <button onclick="window.location.href='index.php'">Continue Shopping</button>
+            </div>
+        <?php endif; ?>
 
-    <div id="paymentModal" class="payment-modal">
-        <div class="payment-modal-content">
-            <h4>Select a <span style="color: #6064b6">Payment</span> method</h4>
-            <form id="payment-form" action="cart.php" method="POST">
+        <div id="paymentModal" class="payment-modal">
+            <div class="payment-modal-content">
+                <h4>Select a <span style="color: #6064b6">Payment</span> method</h4>
                 <input type="radio" name="payment" id="visa" value="VISA">
                 <input type="radio" name="payment" id="mastercard" value="Mastercard">
                 <input type="radio" name="payment" id="paypal" value="Paypal">
@@ -492,18 +504,18 @@ if (isset($_POST['checkout'])) {
                         <span class="check"><i class="fa-solid fa-circle-check" style="color: #6064b6;"></i></span>
                     </label>
                 </div>
-                
-                    <button class="btn-cart" type="submit" name="checkout">Confirm Payment</button>
-                </form>
-            </form>
+
+                <button class="btn-cart" type="submit" name="checkout">Confirm Payment</button>
+
+            </div>
         </div>
-    </div>
-    </div>  
-    <script>
-        // Show Payment Modal
-        document.getElementById("checkout-btn").addEventListener("click", function() {
-            document.getElementById("paymentModal").style.display = "flex";
-        });
+        </form>
+
+        <script>
+            // Show Payment Modal
+            document.getElementById("checkout-btn").addEventListener("click", function() {
+                document.getElementById("paymentModal").style.display = "flex";
+            });
 
         window.onclick = function(event) {
             if (event.target == document.getElementById("paymentModal")) {
