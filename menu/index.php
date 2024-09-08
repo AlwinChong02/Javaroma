@@ -447,8 +447,6 @@ $resultProducts = $conn->query($sqlProducts);
                 document.getElementById("modalTitle").innerText = title;
                 document.getElementById("modalDescription").innerText = description;
 
-                let o
-
                 // Fill ingredients list
                 let ingredientsArray = ingredients.split(',');
                 let ingredientsList = document.getElementById("modalIngredients");
